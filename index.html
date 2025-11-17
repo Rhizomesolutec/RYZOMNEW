@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rhizome Solutec | Cultivating Excellence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0A1F44;
+      color: #fff;
+    }
+    /* Navigation Bar */
+    nav {
+      background: #003366;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      height: 40px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      color: #00FFFF;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Hero Section */
+    .hero {
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0A1F44;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 { font-size: 2.5rem; color: #00FFFF; }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      border-radius: 5px;
+      background: #00FFFF;
+      color: #0A1F44;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #fff; }
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .service-card {
+      background: #003366;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,255,255,0.3);
+    }
+    /* Logo Showcase */
+    .logo-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .logo-grid img {
+      width: 120px;
+      transition: transform 0.3s;
+    }
+    .logo-grid img:hover {
+      transform: scale(1.1);
+    }
+    /* Contact Form */
+    form input, form textarea {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+    form button {
+      padding: 12px 24px;
+      border-radius: 5px;
+      background: #00FFFF;
+      color: #0A1F44;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #fff;
+    }
+    /* Footer */
+    footer {
+      background: #003366;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-container">
+    <img src="company-logo.png" alt="Rhizome Solutec Logo" class="nav-logo">
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <canvas id="networkCanvas"></canvas>
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>We cultivate excellence in IT, software & network solutions</p>
+    <a href="#services" class="btn">Explore Services</a>
+    <a href="#contact" class="btn">Get in Touch</a>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="logo-branding.png" alt="Branding Logo">
+      <h3>Branding & Design</h3>
+      <p>From logo to strategy, we build your brand identity.</p>
+    </div>
+    <div class="service-card">
+      <img src="logo-web.png" alt="Web Logo">
+      <h3>Web Development</h3>
+      <p>Interactive websites tailored to your business needs.</p>
+    </div>
+    <div class="service-card">
+      <img src="logo-mobile.png" alt="Mobile Logo">
+      <h3>Mobile Apps</h3>
+      <p>Innovative apps for Android & iOS platforms.</p>
+    </div>
+    <div class="service-card">
+      <img src="logo-marketing.png" alt="Marketing Logo">
+      <h3>Digital Marketing</h3>
+      <p>SEO, PPC, and social media campaigns to grow your reach.</p>
+    </div>
+    <div class="service-card">
+      <img src="logo-media.png" alt="Media Logo">
+      <h3>Media & Content</h3>
+      <p>Video, graphics, and motion design for engagement.</p>
+    </div>
+    <div class="service-card">
+      <img src="logo-strategy.png" alt="Strategy Logo">
+      <h3>Business Strategy</h3>
+      <p>Market analysis and planning for sustainable growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Work Showcase -->
+<section id="work">
+  <h2>Our Work</h2>
+  <div class="logo-grid">
+    <img src="client1.png" alt="Client 1">
+    <img src="client2.png" alt="Client 2">
+    <img src="client3.png" alt="Client 3">
+    <img src="client4.png" alt="Client 4">
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required><br>
+    <input type="email" placeholder="Your Email" required><br>
+    <textarea placeholder="Your Message" required></textarea><br>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Rhizome Solutec | Cultivating Excellence</p>
+</footer>
+
+<script>
+  // Typing effect
+  const text = "Cultivating Excellence in Every Solutions";
+  let i = 0;
+  function typingEffect() {
+    if (i < text.length) {
+      document.getElementById("typing").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typingEffect, 100);
+    }
+  }
+  typingEffect();
+
+  // Network motion illustration
+  const canvas = document.getElementById("networkCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = canvas.offsetHeight;
+
+  let nodes = [];
+  for (let i = 0; i < 40; i++) {
+    nodes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, dx: (Math.random()-0.5)*2, dy: (Math.random()-0.5)*2});
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,
