@@ -159,80 +159,6 @@
     }
   </style>
 </head>
-  <script>
-  // Typing effect
-  const text = "Cultivating Excellence in Every Solutions";
-  let i = 0;
-  function typingEffect() {
-    if (i < text.length) {
-      document.getElementById("typing").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typingEffect, 100);
-    }
-  }
-  typingEffect();
-
-  // Network motion illustration
-  const canvas = document.getElementById("networkCanvas");
-  const ctx = canvas.getContext("2d");
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  let nodes = [];
-  for (let i = 0; i < 40; i++) {
-    nodes.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      dx: (Math.random() - 0.5) * 2,
-      dy: (Math.random() - 0.5) * 2
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw nodes
-    nodes.forEach(n => {
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
-      ctx.fillStyle = "#00FFFF";
-      ctx.fill();
-    });
-
-    // Draw connecting lines
-    for (let a = 0; a < nodes.length; a++) {
-      for (let b = a + 1; b < nodes.length; b++) {
-        let dx = nodes[a].x - nodes[b].x;
-        let dy = nodes[a].y - nodes[b].y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(nodes[a].x, nodes[a].y);
-          ctx.lineTo(nodes[b].x, nodes[b].y);
-          ctx.strokeStyle = "rgba(0,255,255,0.2)";
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Update positions
-    nodes.forEach(n => {
-      n.x += n.dx;
-      n.y += n.dy;
-      if (n.x < 0 || n.x > canvas.width) n.dx *= -1;
-      if (n.y < 0 || n.y > canvas.height) n.dy *= -1;
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-</script>
 <body>
 
 <!-- Navigation -->
@@ -337,4 +263,6 @@
 
   // Network motion illustration
   const canvas = document.getElementById("networkCanvas");
-  const ctx
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
