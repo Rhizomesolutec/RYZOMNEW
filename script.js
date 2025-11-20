@@ -2,7 +2,16 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* Typing animation */
-const words = ["Network", "Branding", "Software", "Media production"];
+const words = [
+  "Network",
+  "Branding",
+  "Software",
+  "Media production",
+  "Digital Marketing",
+  "Innovation",
+  "Strategy",
+  "Growth"
+];
 const typingEl = document.getElementById('typing-words');
 let wi = 0, ci = 0, deleting = false;
 
