@@ -1,0 +1,11 @@
+{
+  "name": "RYZOM — Rhizome Solutec",
+  "short_name": "RYZOM",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0D12",
+  "theme_color": "#2F80EC",
+  "icons": [
+    { "src": "favicon.ico", "sizes": "64x64", "type": "image/x-icon", "purpose": "any maskable" }
+  ]
+}
