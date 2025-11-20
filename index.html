@@ -1,268 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rhizome Solutec | Cultivating Excellence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f4f8fb; /* ✅ new background color */
-      color: #0A1F44;
-      position: relative;
-    }
-    /* Watermark Logo */
-    body::before {
-      content: "";
-      background: url('company-logo.png') center center no-repeat;
-      background-size: 300px; /* ✅ watermark size */
-      opacity: 0.08;          /* ✅ transparency */
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;            /* ✅ behind everything */
-    }
-    /* Navigation Bar */
-    nav {
-      background: #003366;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      height: 40px;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      margin: 0;
-      padding: 0;
-    }
-    nav a {
-      color: #00FFFF;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      color: #fff;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    /* Hero Section */
-    .hero {
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero h1 { font-size: 2.5rem; color: #003366; }
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      border-radius: 5px;
-      background: #00FFFF;
-      color: #0A1F44;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn:hover { background: #003366; color: #fff; }
-    canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    /* Services Grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .service-card {
-      background: #003366;
-      color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .service-card img {
-      width: 60px;
-      margin-bottom: 15px;
-    }
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0,255,255,0.3);
-    }
-    /* Logo Showcase */
-    .logo-grid {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-    .logo-grid img {
-      width: 120px;
-      transition: transform 0.3s;
-    }
-    .logo-grid img:hover {
-      transform: scale(1.1);
-    }
-    /* Contact Form */
-    form input, form textarea {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-    }
-    form button {
-      padding: 12px 24px;
-      border-radius: 5px;
-      background: #00FFFF;
-      color: #0A1F44;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-    }
-    form button:hover {
-      background: #003366;
-      color: #fff;
-    }
-    /* Footer */
-    footer {
-      background: #003366;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <title>RYZOM — Rhizome Solutec | Cultivating Excellence in Every Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Branding, web & software, digital marketing, media production, and business strategy delivered with a network-inspired tech identity." />
+  <meta name="theme-color" content="#2F80EC" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Fallback web fonts; swap to self-hosted Bohuan Regular when available -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Animated network background -->
+  <canvas id="network-canvas" aria-hidden="true"></canvas>
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-container">
-    <img src="company-logo.png" alt="Rhizome Solutec Logo" class="nav-logo">
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Our Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- Watermark overlay -->
+  <div class="watermark" aria-hidden="true"></div>
 
-<!-- Hero Section -->
-<section class="hero">
-  <canvas id="networkCanvas"></canvas>
-  <div class="hero-content">
-    <h1 id="typing"></h1>
-    <p>We cultivate excellence in IT, software & network solutions</p>
-    <a href="#services" class="btn">Explore Services</a>
-    <a href="#contact" class="btn">Get in Touch</a>
-  </div>
-</section>
-
-<!-- Services -->
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services-grid">
-    <div class="service-card">
-      <img src="logo-branding.png" alt="Branding Logo">
-      <h3>Branding & Design</h3>
-      <p>From logo to strategy, we build your brand identity.</p>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="brand">
+        <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+        <div class="brand-text">
+          <span class="brand-name">RYZOM</span>
+          <span class="brand-sub">Rhizome Solutec</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn btn-primary">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
-    <div class="service-card">
-      <img src="logo-web.png" alt="Web Logo">
-      <h3>Web Development</h3>
-      <p>Interactive websites tailored to your business needs.</p>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="Hero.jpeg" alt="Hero background" class="hero-bg-img" />
     </div>
-    <div class="service-card">
-      <img src="logo-mobile.png" alt="Mobile Logo">
-      <h3>Mobile Apps</h3>
-      <p>Innovative apps for Android & iOS platforms.</p>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="fade-up">
+          From strong roots to connected growth.
+          <br />
+          <span class="typing">
+            <span id="typing-words"></span>
+            <span class="cursor">|</span>
+          </span>
+        </h1>
+        <p class="fade-up delay-1">
+          We craft branding, build web & mobile, power digital marketing, produce media,
+          and design strategies that scale—organically and intelligently.
+        </p>
+        <div class="hero-actions fade-up delay-2">
+          <a href="#services" class="btn btn-gradient">Explore services</a>
+          <a href="#work" class="btn btn-outline">See our work</a>
+        </div>
+        <div class="hero-badges fade-up delay-3">
+          <span class="badge">Insight</span>
+          <span class="badge">Innovation</span>
+          <span class="badge">Balance</span>
+          <span class="badge">Impact</span>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="company-logo.png" alt="RYZOM mark" class="hero-logo lift" />
+      </div>
     </div>
-    <div class="service-card">
-      <img src="logo-marketing.png" alt="Marketing Logo">
-      <h3>Digital Marketing</h3>
-      <p>SEO, PPC, and social media campaigns to grow your reach.</p>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Services</h2>
+        <p class="fade-up delay-1">A complete, interconnected stack—rooted in strategy and delivered with precision.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card fade-up">
+          <div class="card-media">
+            <img src="logo-branding.png" alt="Branding and identity" />
+          </div>
+          <div class="card-body">
+            <h3>Branding & Design</h3>
+            <ul class="list">
+              <li><strong>Brand from root:</strong> Naming, tagline, palette, identity</li>
+              <li><strong>Logo:</strong> Impactful, recognizable marks</li>
+              <li><strong>Strategy:</strong> Positioning, audience, messaging</li>
+              <li><strong>Product design:</strong> Visual systems for market fit</li>
+              <li><strong>Posters & graphics:</strong> Campaign-ready assets</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card fade-up delay-1">
+          <div class="card-media">
+            <img src="logo-web.png" alt="Web development and applications" />
+          </div>
+          <div class="card-body">
+            <h3>Web Development</h3>
+            <ul class="list">
+              <li><strong>Websites:</strong> Branded, performant, responsive</li>
+              <li><strong>Web apps:</strong> Interactive experiences that engage</li>
+              <li><strong>Integrations:</strong> Data, automation, APIs</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card fade-up delay-2">
+          <div class="card-media">
+            <img src="logo-mobileapp.png" alt="Mobile app development" />
+          </div>
+          <div class="card-body">
+            <h3>Mobile App Development</h3>
+            <ul class="list">
+              <li><strong>Android & iOS:</strong> User-first interfaces</li>
+              <li><strong>Feature-rich:</strong> Secure, scalable</li>
+              <li><strong>Lifecycle:</strong> Design, build, launch, iterate</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card fade-up delay-3">
+          <div class="card-media">
+            <img src="logo-marketing.png" alt="Digital marketing and promotions" />
+          </div>
+          <div class="card-body">
+            <h3>Digital Marketing & Promotion</h3>
+            <ul class="list">
+              <li><strong>SEO:</strong> Technical, on-page, content</li>
+              <li><strong>Email:</strong> Lifecycle flows, campaigns</li>
+              <li><strong>Content:</strong> Editorial and media assets</li>
+              <li><strong>PPC:</strong> Targeted ads & optimization</li>
+              <li><strong>Social:</strong> Management, engagement, growth</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card fade-up delay-4">
+          <div class="card-media">
+            <img src="logo-media.png" alt="Media production and content creation" />
+          </div>
+          <div class="card-body">
+            <h3>Media Support & Content Creation</h3>
+            <ul class="list">
+              <li><strong>Video:</strong> Concept to final cut</li>
+              <li><strong>Photography:</strong> Product, lifestyle, brand</li>
+              <li><strong>Graphic design:</strong> Visual systems</li>
+              <li><strong>Podcast:</strong> Audio storytelling</li>
+              <li><strong>Animation & motion:</strong> Branded graphics</li>
+              <li><strong>Media planning:</strong> Placement & ROI</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card fade-up delay-5">
+          <div class="card-media">
+            <img src="logo-strategy.png" alt="Business strategy development" />
+          </div>
+          <div class="card-body">
+            <h3>Business Strategy Development</h3>
+            <ul class="list">
+              <li><strong>Market analysis:</strong> Research, segmentation</li>
+              <li><strong>Goal setting:</strong> Objectives, KPIs, roadmaps</li>
+              <li><strong>Strategic planning:</strong> Initiatives & priorities</li>
+              <li><strong>SWOT:</strong> Strengths, weaknesses, opportunities, threats</li>
+              <li><strong>Business models:</strong> Value & revenue design</li>
+              <li><strong>Financial planning:</strong> Budgets & forecasts</li>
+            </ul>
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="service-card">
-      <img src="logo-media.png" alt="Media Logo">
-      <h3>Media & Content</h3>
-      <p>Video, graphics, and motion design for engagement.</p>
+  </section>
+
+  <section id="work" class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Selected work</h2>
+        <p class="fade-up delay-1">A snapshot of how strategy meets execution.</p>
+      </div>
+
+      <div class="showcase">
+        <figure class="showcase-item fade-up">
+          <img src="Hero.jpeg" alt="Connected platform" class="lift" />
+          <figcaption><strong>Connected platform:</strong> Web + data + automation</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-1">
+          <img src="logo-media.png" alt="Media production" class="lift" />
+          <figcaption><strong>Media production:</strong> Video, sound, post</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-2">
+          <img src="logo-branding.png" alt="Brand systems" class="lift" />
+          <figcaption><strong>Brand systems:</strong> Modular identities</figcaption>
+        </figure>
+      </div>
     </div>
-    <div class="service-card">
-      <img src="logo-strategy.png" alt="Strategy Logo">
-      <h3>Business Strategy</h3>
-      <p>Market analysis and planning for sustainable growth.</p>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Who we are</h2>
+        <p class="fade-up delay-1">Your partner in growth—rooted in insight, scaling with innovation.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card fade-up">
+          <h3>Vision</h3>
+          <p>To be the top choice for business growth, helping companies succeed with creative and complete solutions.</p>
+        </div>
+        <div class="about-card fade-up delay-1">
+          <h3>Mission</h3>
+          <p>To deliver outstanding business support services that cultivate growth, inspire success, and enable businesses to reach their highest potential.</p>
+        </div>
+        <div class="about-card fade-up delay-2">
+          <h3>Philosophy</h3>
+          <p>Small changes build strength and stability. From roots to branches, we connect brands to people—powerfully and organically.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Work Showcase -->
-<section id="work">
-  <h2>Our Work</h2>
-  <div class="logo-grid">
-    <img src="client1.png" alt="Client 1">
-    <img src="client2.png" alt="Client 2">
-    <img src="client3.png" alt="Client 3">
-    <img src="client4.png" alt="Client 4">
-  </div>
-</section>
+  <section id="contact" class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Let’s build your growth</h2>
+      </div>
+      <form class="contact-form fade-up" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="6" placeholder="What are you building? Timelines? Outcomes?" required></textarea>
+          </div>
+        </div>
+        <button class="btn btn-gradient" type="submit">Send inquiry</button>
+      </form>
+      <div class="contact-meta fade-up delay-1">
+        <p><strong>Email:</strong> hello@ryzom.in</p>
+        <p><strong>Website:</strong> www.ryzom.in</p>
+        <p><strong>Location:</strong> Ponnani, KL, India</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Contact -->
-<section id="contact">
-  <h2>Contact Us</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required><br>
-    <input type="email" placeholder="Your Email" required><br>
-    <textarea placeholder="Your Message" required></textarea><br>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+        <div>
+          <strong>RYZOM — Rhizome Solutec</strong>
+          <div class="sub">Cultivating excellence in every solutions</div>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-legal">
+        <span>© <span id="year"></span> RYZOM. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
 
-<!-- Footer -->
-<footer>
-  <p>© 2025 Rhizome Solutec | Cultivating Excellence</p>
-</footer>
-
-<script>
-  // Typing effect
-  const text = "Cultivating Excellence in Every Solutions";
-  let i = 0;
-  function typingEffect() {
-    if (i < text.length) {
-      document.getElementById("typing").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typingEffect, 100);
-    }
-  }
-  typingEffect();
-
-  // Network motion illustration
-  const canvas = document.getElementById("networkCanvas");
-  const ctx = canvas.getContext("2d");
-
-  function resizeCanvas() {
+  <script src="script.js"></script>
+</body>
+</html>
