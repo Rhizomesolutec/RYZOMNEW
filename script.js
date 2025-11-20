@@ -10,7 +10,7 @@ const words = [
   "Digital Marketing",
   "Innovation",
   "Strategy",
-  "Growth"
+  "Web Development"
 ];
 const typingEl = document.getElementById('typing-words');
 let wi = 0, ci = 0, deleting = false;
