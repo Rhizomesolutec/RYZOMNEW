@@ -7,13 +7,9 @@
   <meta name="description" content="Branding, web & software, digital marketing, media production, and business strategy delivered with a network-inspired tech identity." />
   <meta name="theme-color" content="#2F80EC" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -21,7 +17,7 @@
   <canvas id="network-canvas" aria-hidden="true"></canvas>
   <div class="watermark" aria-hidden="true"></div>
 
-  <!-- ================= HEADER ================= -->
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="#" class="brand">
@@ -41,7 +37,7 @@
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"><img src="Hero.jpeg" alt="Hero background" class="hero-bg-img" /></div>
     <div class="container hero-grid">
@@ -60,7 +56,7 @@
     </div>
   </section>
 
-  <!-- ================= SERVICES TIMELINE ================= -->
+  <!-- SERVICES TIMELINE -->
   <section id="services" class="section">
     <div class="container">
       <div class="section-head">
@@ -68,14 +64,100 @@
         <p class="fade-up delay-1">From roots to growth — each step builds your brand and business.</p>
       </div>
       <div class="timeline">
-        <!-- Timeline items: Branding, Web, Mobile, Marketing, Media, Strategy -->
-        <!-- Each has icon, heading, description, and bullet list -->
-        <!-- (Content already shown in previous snippets) -->
+        <!-- Branding -->
+        <div class="timeline-item fade-up">
+          <img src="logo-branding.png" alt="Branding & Design" />
+          <div>
+            <h3>Branding & Design</h3>
+            <p>Identity systems, logos, product design, and creative campaigns.</p>
+            <ul>
+              <li>Logo design with multiple variations</li>
+              <li>Complete brand guidelines</li>
+              <li>Marketing collateral (brochures, posters)</li>
+              <li>Product packaging concepts</li>
+            </ul>
+            <p class="case-study"><strong>Case Study:</strong> Helped a retail brand increase recognition by 70% with a refreshed identity.</p>
+          </div>
+        </div>
+        <!-- Web -->
+        <div class="timeline-item fade-up delay-1">
+          <img src="logo-web.png" alt="Web Development" />
+          <div>
+            <h3>Web Development</h3>
+            <p>Responsive websites, web apps, and integrations.</p>
+            <ul>
+              <li>Corporate and e-commerce websites</li>
+              <li>Interactive dashboards and portals</li>
+              <li>API integrations and automation</li>
+              <li>Performance optimization</li>
+            </ul>
+            <p class="stats">🚀 120+ websites launched successfully</p>
+          </div>
+        </div>
+        <!-- Mobile -->
+        <div class="timeline-item fade-up delay-2">
+          <img src="logo-mobileapp.png" alt="Mobile Apps" />
+          <div>
+            <h3>Mobile App Development</h3>
+            <p>Android & iOS apps with user-first design.</p>
+            <ul>
+              <li>Native and cross-platform apps</li>
+              <li>UI/UX prototyping</li>
+              <li>Secure authentication systems</li>
+              <li>App store deployment and support</li>
+            </ul>
+            <p class="testimonial">“Our app downloads doubled after RYZOM redesigned our mobile experience.”</p>
+          </div>
+        </div>
+        <!-- Marketing -->
+        <div class="timeline-item fade-up delay-3">
+          <img src="logo-marketing.png" alt="Digital Marketing" />
+          <div>
+            <h3>Digital Marketing</h3>
+            <p>SEO, PPC, content marketing, and social growth.</p>
+            <ul>
+              <li>Search engine optimization</li>
+              <li>Google Ads and PPC campaigns</li>
+              <li>Content creation and blogging</li>
+              <li>Social media management</li>
+            </ul>
+            <p class="stats">📈 Average client ROI: 3.5x</p>
+          </div>
+        </div>
+        <!-- Media -->
+        <div class="timeline-item fade-up delay-4">
+          <img src="logo-media.png" alt="Media Production" />
+          <div>
+            <h3>Media Production</h3>
+            <p>Video, photography, animation, and advertising support.</p>
+            <ul>
+              <li>Corporate video production</li>
+              <li>Product photography</li>
+              <li>Motion graphics and animation</li>
+              <li>Podcast and audio editing</li>
+            </ul>
+            <p class="testimonial">“Their video campaign boosted our engagement by 200%.”</p>
+          </div>
+        </div>
+        <!-- Strategy -->
+        <div class="timeline-item fade-up delay-5">
+          <img src="logo-strategy.png" alt="Business Strategy" />
+          <div>
+            <h3>Business Strategy</h3>
+            <p>Market analysis, planning, and financial strategy.</p>
+            <ul>
+              <li>Market research and segmentation</li>
+              <li>Goal setting and KPIs</li>
+              <li>SWOT analysis</li>
+              <li>Financial planning and forecasting</li>
+            </ul>
+            <p class="case-study"><strong>Case Study:</strong> Guided a startup to profitability within 18 months.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- ================= WORK ================= -->
+    <!-- ================= WORK ================= -->
   <section id="work" class="section alt">
     <div class="container">
       <div class="section-head">
@@ -83,7 +165,18 @@
         <p class="fade-up delay-1">A snapshot of how strategy meets execution.</p>
       </div>
       <div class="showcase">
-        <!-- Showcase items -->
+        <figure class="showcase-item fade-up">
+          <img src="Hero.jpeg" alt="Connected platform" class="lift" />
+          <figcaption><strong>Connected platform:</strong> Web + data + automation</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-1">
+          <img src="logo-media.png" alt="Media production" class="lift" />
+          <figcaption><strong>Media production:</strong> Video, sound, post</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-2">
+          <img src="logo-branding.png" alt="Brand systems" class="lift" />
+          <figcaption><strong>Brand systems:</strong> Modular identities</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -96,9 +189,22 @@
         <p class="fade-up delay-1">Your partner in growth—rooted in insight, scaling with innovation.</p>
       </div>
       <div class="about-grid">
-        <div class="about-card fade-up"><h3>Vision</h3><p>...</p></div>
-        <div class="about-card fade-up delay-1"><h3>Mission</h3><p>...</p></div>
-        <div class="about-card fade-up delay-2"><h3>Philosophy</h3><p>...</p></div>
+        <div class="about-card fade-up">
+          <h3>Vision</h3>
+          <p>To be the top choice for business growth, helping companies succeed with creative and complete solutions.</p>
+        </div>
+        <div class="about-card fade-up delay-1">
+          <h3>Mission</h3>
+          <p>To deliver outstanding business support services that cultivate growth, inspire success, and enable businesses to reach their highest potential.</p>
+        </div>
+        <div class="about-card fade-up delay-2">
+          <h3>Philosophy</h3>
+          <p>Small changes build strength and stability. From roots to branches, we connect brands to people—powerfully and organically.</p>
+        </div>
+        <div class="about-card fade-up delay-3">
+          <h3>Values</h3>
+          <p>Integrity, innovation, and impact guide every project we deliver.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -131,10 +237,16 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
-        <div><strong>RYZOM — Rhizome Solutec</strong><div class="sub">Cultivating excellence in every solutions</div></div>
+        <div>
+          <strong>RYZOM — Rhizome Solutec</strong>
+          <div class="sub">Cultivating excellence in every solutions</div>
+        </div>
       </div>
       <nav class="footer-nav">
-        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
       <div class="footer-legal"><span>© <span id="year"></span> RYZOM. All rights reserved.</span></div>
     </div>
@@ -142,8 +254,53 @@
 
   <!-- ================= SCRIPTS ================= -->
   <script>
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
-    // Typing animation, fade-up observer, network canvas animation, nav toggle...
+
+    // Typing animation
+    const words = ["Network","Branding","Software","Media production","Digital Marketing","Innovation","Strategy","Growth"];
+    const typingEl = document.getElementById('typing-words');
+    let wi=0,ci=0,deleting=false;
+    function typeLoop(){
+      const current=words[wi];
+      if(!deleting){
+        typingEl.textContent=current.slice(0,ci+1);ci++;
+        if(ci===current.length){deleting=true;setTimeout(typeLoop,1200);return;}
+        setTimeout(typeLoop,80);
+      }else{
+        typingEl.textContent=current.slice(0,ci-1);ci--;
+        if(ci===0){deleting=false;wi=(wi+1)%words.length;}
+        setTimeout(typeLoop,60);
+      }
+    }
+    typeLoop();
+
+    // Fade-up observer
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fade-in');observer.unobserve(e.target);}});
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-up,.showcase-item,.about-card').forEach(el=>observer.observe(el));
+
+    // Network canvas animation
+    const canvas=document.getElementById('network-canvas');const ctx=canvas.getContext('2d');let W,H,points;
+    function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;initPoints();}
+    window.addEventListener('resize',resize);resize();
+    function rand(min,max){return Math.random()*(max-min)+min;}
+    function initPoints(){const density=Math.min(90,Math.floor((W*H)/18000));points=Array.from({length:density},()=>({x:rand(0,W),y:rand(0,H),vx:rand(-0.4,0.4),vy:rand(-0.4,0.4)}));}
+    function step(){ctx.clearRect(0,0,W,H);
+      for(let p of points){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+      for(let i=0;i<points.length;i++){for(let j=i+1;j<points.length;j++){const a=points[i],b=points[j];const dx=a.x-b.x,dy=a.y-b.y;const dist=Math.hypot(dx,dy);
+        if(dist<140){const alpha=(1-dist/140)*0.35;const grad=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+          grad.addColorStop(0,`rgba(235,87,87,${alpha})`);grad.addColorStop(1,`rgba(47,128,236,${alpha})`);
+          ctx.strokeStyle=grad;ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+      for(let p of points){ctx.fillStyle='rgba(242,201,77,0.6)';ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,Math.PI*2);ctx.fill();}
+      requestAnimationFrame(step);}
+    step();
+
+    // Mobile nav toggle
+    const toggle=document.querySelector('.nav-toggle');const nav=document.querySelector('.nav');
+    toggle?.addEventListener('click',()=>{const opened=nav.style.display==='flex';nav.style.display=opened?'none':'flex';});
   </script>
 </body>
 </html>
+
