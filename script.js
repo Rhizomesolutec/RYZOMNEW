@@ -155,3 +155,51 @@ window.addEventListener('scroll', () => {
     });
   }
 });
+// ================= GROWTH TREE ANIMATION =================
+const treeSvg = document.querySelector('.growth-svg');
+const paths = treeSvg?.querySelectorAll('.trunk, .branch');
+const labels = treeSvg?.querySelectorAll('.label');
+const leaves = treeSvg?.querySelectorAll('.leaf');
+const fruits = treeSvg?.querySelectorAll('.fruit');
+
+window.addEventListener('scroll', () => {
+  if (!treeSvg) return;
+  const treePos = treeSvg.getBoundingClientRect().top;
+  const winHeight = window.innerHeight;
+
+  if (treePos < winHeight - 100) {
+    // Draw trunk and branches
+    paths.forEach((path, i) => {
+      path.style.animation = `draw 1.5s forwards ${i * 0.5}s`;
+    });
+
+    // Sprout leaves
+    leaves.forEach((leaf, i) => {
+      setTimeout(() => {
+        leaf.style.opacity = 1;
+        leaf.style.animation = 'sprout 0.8s ease-out forwards';
+      }, 1500 + i * 300);
+    });
+
+    // Show fruits
+    fruits.forEach((fruit, i) => {
+      setTimeout(() => {
+        fruit.style.opacity = 1;
+        fruit.style.transform = 'scale(1)';
+      }, 2500 + i * 400);
+    });
+
+    // Fade in labels
+    labels.forEach((label, i) => {
+      setTimeout(() => { label.style.opacity = 1; }, 3000 + i * 500);
+    });
+
+    // Add sway effect after everything has grown
+    setTimeout(() => {
+      treeSvg.querySelectorAll('.branch, .leaf, .fruit').forEach(el => {
+        el.style.animation = 'sway 4s ease-in-out infinite';
+      });
+    }, 4000);
+  }
+});
+
