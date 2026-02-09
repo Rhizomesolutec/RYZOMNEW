@@ -105,6 +105,17 @@ a{color:var(--text);text-decoration:none}
   60% { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
+@keyframes sway {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(1deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.branch, .leaf, .fruit {
+  transform-origin: center;
+}
 
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:60px;position:relative;margin-top:40px;padding-left:80px}
