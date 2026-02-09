@@ -340,29 +340,11 @@
     // Mobile nav toggle
     const toggle=document.querySelector('.nav-toggle');const nav=document.querySelector('.nav');
     toggle?.addEventListener('click',()=>{const opened=nav.style.display==='flex';nav.style.display=opened?'none':'flex';});
-    // Growth Tree animation
-const trunk = document.querySelector('.trunk');
-const branches = document.querySelectorAll('.branch');
 
-window.addEventListener('scroll', () => {
-  const treeSection = document.getElementById('growth-tree');
-  if (!treeSection) return;
-
-  const treePos = treeSection.offsetTop;
-  const scrollPos = window.scrollY + window.innerHeight;
-
-  if (scrollPos > treePos + 100) {
-    trunk.style.height = '400px'; // grow trunk
-    branches.forEach((b, i) => {
-      setTimeout(() => {
-        b.style.opacity = 1;
-        b.style.transform = 'translateY(0)';
-      }, i * 400);
-    });
-  }
-});
-
-  </script>
+    <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="script.js"></script>
 </body>
 </html>
 
