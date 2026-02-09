@@ -129,33 +129,8 @@ toggle?.addEventListener('click', () => {
   const opened = nav.style.display === 'flex';
   nav.style.display = opened ? 'none' : 'flex';
 });
-// ================= GROWTH TREE ANIMATION =================
-const treeSvg = document.querySelector('.growth-svg');
-const paths = treeSvg?.querySelectorAll('.trunk, .branch');
-const labels = treeSvg?.querySelectorAll('.label');
-const leaves = treeSvg?.querySelectorAll('.leaf');
 
-window.addEventListener('scroll', () => {
-  if (!treeSvg) return;
-  const treePos = treeSvg.getBoundingClientRect().top;
-  const winHeight = window.innerHeight;
-
-  if (treePos < winHeight - 100) {
-    paths.forEach((path, i) => {
-      path.style.animation = `draw 1.5s forwards ${i * 0.5}s`;
-    });
-    labels.forEach((label, i) => {
-      setTimeout(() => { label.style.opacity = 1; }, 1500 + i * 500);
-    });
-    leaves.forEach((leaf, i) => {
-      setTimeout(() => {
-        leaf.style.opacity = 1;
-        leaf.style.transform = 'scale(1)';
-      }, 2000 + i * 500);
-    });
-  }
-});
-// ================= GROWTH TREE ANIMATION =================
+/* Growth Tree Animation */
 const treeSvg = document.querySelector('.growth-svg');
 const paths = treeSvg?.querySelectorAll('.trunk, .branch');
 const labels = treeSvg?.querySelectorAll('.label');
@@ -202,4 +177,3 @@ window.addEventListener('scroll', () => {
     }, 4000);
   }
 });
-
