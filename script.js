@@ -143,37 +143,45 @@ window.addEventListener('scroll', () => {
   const winHeight = window.innerHeight;
 
   if (treePos < winHeight - 100) {
-    // Draw trunk and branches
+    // Draw trunk first
+    const trunk = treeSvg.querySelector('.trunk');
+    trunk.style.animation = 'draw 1.5s forwards';
+
+    // Branches staggered
     paths.forEach((path, i) => {
-      path.style.animation = `draw 1.5s forwards ${i * 0.5}s`;
+      if (path.classList.contains('branch')) {
+        path.style.animation = `draw 1.2s forwards ${i * 0.6 + 1.5}s`;
+      }
     });
 
-    // Sprout leaves
+    // Leaves sprout after branches
     leaves.forEach((leaf, i) => {
       setTimeout(() => {
         leaf.style.opacity = 1;
         leaf.style.animation = 'sprout 0.8s ease-out forwards';
-      }, 1500 + i * 300);
+      }, 2500 + i * 300);
     });
 
-    // Show fruits
+    // Fruits appear later
     fruits.forEach((fruit, i) => {
       setTimeout(() => {
         fruit.style.opacity = 1;
         fruit.style.transform = 'scale(1)';
-      }, 2500 + i * 400);
+      }, 3500 + i * 400);
     });
 
-    // Fade in labels
+    // Labels fade in last
     labels.forEach((label, i) => {
-      setTimeout(() => { label.style.opacity = 1; }, 3000 + i * 500);
+      setTimeout(() => {
+        label.style.opacity = 1;
+      }, 4500 + i * 500);
     });
 
-    // Add sway effect after everything has grown
+    // Continuous sway after everything
     setTimeout(() => {
       treeSvg.querySelectorAll('.branch, .leaf, .fruit').forEach(el => {
         el.style.animation = 'sway 4s ease-in-out infinite';
       });
-    }, 4000);
+    }, 5500);
   }
 });
