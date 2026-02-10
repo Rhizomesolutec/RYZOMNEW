@@ -130,7 +130,7 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Canvas Growth Tree Animation */
+/* Canvas Growth Tree with Wide Canopy + Roots */
 const services = [
   "Branding & Design",
   "Web Development",
@@ -140,10 +140,10 @@ const services = [
   "Business Strategy"
 ];
 
-function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceIndex = 0) {
+function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceIndex = null) {
   if (depth === 0) return;
 
-  // Draw branch
+  // Branch line
   ctx.beginPath();
   ctx.moveTo(startX, startY);
   const endX = startX + length * Math.cos(angle);
@@ -153,7 +153,7 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
   ctx.lineWidth = branchWidth;
   ctx.stroke();
 
-  // Leaves at shallow depth
+  // Leaves
   if (depth < 3) {
     ctx.beginPath();
     ctx.arc(endX, endY, 6, 0, Math.PI * 2);
@@ -162,32 +162,59 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
   }
 
   // Fruits + labels at tips
-  if (depth === 1 && serviceIndex < services.length) {
+  if (depth === 1 && serviceIndex !== null) {
     ctx.beginPath();
-    ctx.arc(endX, endY, 8, 0, Math.PI * 2);
+    ctx.arc(endX, endY, 9, 0, Math.PI * 2);
     ctx.fillStyle = '#f2c94c';
     ctx.fill();
 
     ctx.fillStyle = '#333';
     ctx.font = '16px Montserrat';
-    ctx.fillText(services[serviceIndex], endX + 10, endY);
+    ctx.fillText(services[serviceIndex], endX + 12, endY);
   }
 
-  // Recursive branches with incremented service index
+  // Recursive branches
   setTimeout(() => {
-    drawBranch(ctx, endX, endY, length * 0.7, angle - 0.3, depth - 1, branchWidth * 0.7, serviceIndex + 1);
-    drawBranch(ctx, endX, endY, length * 0.7, angle + 0.3, depth - 1, branchWidth * 0.7, serviceIndex + 1);
+    drawBranch(ctx, endX, endY, length * 0.75, angle - 0.4, depth - 1, branchWidth * 0.7, serviceIndex);
+    drawBranch(ctx, endX, endY, length * 0.75, angle + 0.4, depth - 1, branchWidth * 0.7, serviceIndex);
   }, 400);
+}
+
+function drawRoots(ctx, startX, startY) {
+  ctx.strokeStyle = '#8B4513'; // root color
+  ctx.lineWidth = 5;
+
+  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
+  rootAngles.forEach(angle => {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    const endX = startX + 120 * Math.cos(angle);
+    const endY = startY - 80 * Math.sin(angle);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+  });
+
+  // Highlight roots glow
+  ctx.shadowColor = 'rgba(139,69,19,0.6)';
+  ctx.shadowBlur = 15;
 }
 
 function growTree() {
   const canvas = document.getElementById('treeCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
-  canvas.height = 600; // fixed height for laptop view
+  canvas.height = 600;
 
-  // Start trunk with service mapping
-  drawBranch(ctx, canvas.width / 2, canvas.height, 120, Math.PI / 2, 8, 10, 0);
+  // Draw roots first
+  drawRoots(ctx, canvas.width / 2, canvas.height);
+
+  // Grow trunk + wide branches
+  drawBranch(ctx, canvas.width / 2, canvas.height, 160, Math.PI / 2, 8, 12, 0); // trunk
+  drawBranch(ctx, canvas.width / 2, canvas.height - 100, 140, Math.PI / 2 - 0.3, 7, 10, 1); // left
+  drawBranch(ctx, canvas.width / 2, canvas.height - 100, 140, Math.PI / 2 + 0.3, 7, 10, 2); // right
+  drawBranch(ctx, canvas.width / 2, canvas.height - 200, 120, Math.PI / 2 - 0.6, 6, 9, 3); // far left
+  drawBranch(ctx, canvas.width / 2, canvas.height - 200, 120, Math.PI / 2 + 0.6, 6, 9, 4); // far right
+  drawBranch(ctx, canvas.width / 2, canvas.height - 250, 100, Math.PI / 2, 5, 8, 5); // top
 }
 
 window.addEventListener('load', growTree);
