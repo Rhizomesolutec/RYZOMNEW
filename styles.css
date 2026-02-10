@@ -62,9 +62,10 @@ a{color:var(--text);text-decoration:none}
   display: block;
   margin: 40px auto;
 }
+
 .trunk, .branch {
   fill: none;
-  stroke: #654321;
+  stroke: #654321; /* brown trunk/branches */
   stroke-width: 6;
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
@@ -73,11 +74,13 @@ a{color:var(--text);text-decoration:none}
 .branch {
   stroke-width: 4;
 }
+
 .roots {
   font-style: italic;
   fill: #777;
   font-size: 14px;
 }
+
 .label {
   font-family: Montserrat, sans-serif;
   font-weight: 600;
@@ -85,26 +88,32 @@ a{color:var(--text);text-decoration:none}
   opacity: 0;
   transition: opacity 1s ease;
 }
+
 .leaf {
-  fill: #2ecc71;
+  fill: #2ecc71; /* green leaves */
   opacity: 0;
   transform: scale(0);
   transform-origin: center;
 }
+
 .fruit {
-  fill: #f2c94c;
+  fill: #f2c94c; /* golden fruits */
   opacity: 0;
   transform: scale(0);
   transform-origin: center;
 }
+
+/* Animations */
 @keyframes draw {
   to { stroke-dashoffset: 0; }
 }
+
 @keyframes sprout {
   0% { transform: scale(0); opacity: 0; }
   60% { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
+
 @keyframes sway {
   0%   { transform: rotate(0deg); }
   25%  { transform: rotate(1deg); }
@@ -113,6 +122,7 @@ a{color:var(--text);text-decoration:none}
   100% { transform: rotate(0deg); }
 }
 
+/* Ensure sway applies smoothly */
 .branch, .leaf, .fruit {
   transform-origin: center;
 }
