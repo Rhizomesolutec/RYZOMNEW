@@ -66,7 +66,6 @@ a{color:var(--text);text-decoration:none}
 .section.alt{background:linear-gradient(180deg,#0b0d12 0%,#0e1016 100%)}
 .section-head h2{font-size:clamp(32px,4vw,48px);margin:0 0 10px}
 .section-head p{color:var(--muted);margin:0}
-
 /* GROWTH TREE (SVG version) */
 .growth-svg {
   width: 100%;
@@ -138,7 +137,14 @@ a{color:var(--text);text-decoration:none}
 .branch, .leaf, .fruit {
   transform-origin: center;
 }
-
+@keyframes shimmer {
+  0%   { fill: var(--green); }
+  50%  { fill: var(--green-light); }
+  100% { fill: var(--green); }
+}
+.leaf {
+  animation: shimmer 6s ease-in-out infinite alternate;
+}
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:60px;position:relative;margin-top:40px;padding-left:80px}
 .timeline::before{content:"";position:absolute;left:40px;top:0;bottom:0;width:4px;background:linear-gradient(var(--blue),var(--purple))}
