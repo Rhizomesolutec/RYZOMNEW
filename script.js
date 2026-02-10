@@ -184,7 +184,7 @@ function growTree() {
   const canvas = document.getElementById('treeCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.height = 600; // fixed height for laptop view
 
   // Start trunk with service mapping
   drawBranch(ctx, canvas.width / 2, canvas.height, 120, Math.PI / 2, 8, 10, 0);
