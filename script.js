@@ -130,73 +130,81 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Canvas Growth Tree with Wide Canopy + Roots */
+/* Canvas Growth Tree with Animated Roots + Fatty Branches + Sway */
 const services = [
-  "Branding & Design",
-  "Web Development",
-  "Mobile Apps",
-  "Digital Marketing",
-  "Media Production",
-  "Business Strategy"
+  "Branding & Design",      // left branch
+  "Web Development",        // right branch
+  "Mobile Apps",            // far left
+  "Digital Marketing",      // far right
+  "Media Production",       // upper left
+  "Business Strategy"       // upper right
 ];
 
-function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceIndex = null) {
+function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceLabel = null) {
   if (depth === 0) return;
 
-  // Branch line
+  // Branch line (thicker)
   ctx.beginPath();
   ctx.moveTo(startX, startY);
   const endX = startX + length * Math.cos(angle);
   const endY = startY - length * Math.sin(angle);
   ctx.lineTo(endX, endY);
-  ctx.strokeStyle = '#654321';
+  ctx.strokeStyle = '#4a2c0a'; // darker brown
   ctx.lineWidth = branchWidth;
+  ctx.lineCap = 'round';
   ctx.stroke();
 
   // Leaves
   if (depth < 3) {
     ctx.beginPath();
-    ctx.arc(endX, endY, 6, 0, Math.PI * 2);
+    ctx.arc(endX, endY, 7, 0, Math.PI * 2);
     ctx.fillStyle = depth % 2 === 0 ? '#2ecc71' : '#27ae60';
     ctx.fill();
   }
 
   // Fruits + labels at tips
-  if (depth === 1 && serviceIndex !== null) {
+  if (depth === 1 && serviceLabel) {
     ctx.beginPath();
-    ctx.arc(endX, endY, 9, 0, Math.PI * 2);
+    ctx.arc(endX, endY, 11, 0, Math.PI * 2);
     ctx.fillStyle = '#f2c94c';
     ctx.fill();
 
     ctx.fillStyle = '#333';
     ctx.font = '16px Montserrat';
-    ctx.fillText(services[serviceIndex], endX + 12, endY);
+    ctx.fillText(serviceLabel, endX + 14, endY);
   }
 
   // Recursive branches
   setTimeout(() => {
-    drawBranch(ctx, endX, endY, length * 0.75, angle - 0.4, depth - 1, branchWidth * 0.7, serviceIndex);
-    drawBranch(ctx, endX, endY, length * 0.75, angle + 0.4, depth - 1, branchWidth * 0.7, serviceIndex);
+    drawBranch(ctx, endX, endY, length * 0.8, angle - 0.35, depth - 1, branchWidth * 0.75, serviceLabel);
+    drawBranch(ctx, endX, endY, length * 0.8, angle + 0.35, depth - 1, branchWidth * 0.75, serviceLabel);
   }, 400);
 }
 
-function drawRoots(ctx, startX, startY) {
-  ctx.strokeStyle = '#8B4513'; // root color
-  ctx.lineWidth = 5;
-
-  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
-  rootAngles.forEach(angle => {
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    const endX = startX + 120 * Math.cos(angle);
-    const endY = startY - 80 * Math.sin(angle);
-    ctx.lineTo(endX, endY);
-    ctx.stroke();
-  });
-
-  // Highlight roots glow
+function animateRoots(ctx, startX, startY) {
+  ctx.strokeStyle = '#8B4513';
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
   ctx.shadowColor = 'rgba(139,69,19,0.6)';
   ctx.shadowBlur = 15;
+
+  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
+  let step = 0;
+
+  function growRoots() {
+    ctx.clearRect(0, startY - 120, ctx.canvas.width, 120); // clear root area
+    rootAngles.forEach(angle => {
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      const endX = startX + step * Math.cos(angle);
+      const endY = startY - step * Math.sin(angle);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+    });
+    step += 4;
+    if (step < 150) requestAnimationFrame(growRoots);
+  }
+  growRoots();
 }
 
 function growTree() {
@@ -205,16 +213,36 @@ function growTree() {
   canvas.width = window.innerWidth;
   canvas.height = 600;
 
-  // Draw roots first
-  drawRoots(ctx, canvas.width / 2, canvas.height);
+  // Animate roots first
+  animateRoots(ctx, canvas.width / 2, canvas.height);
 
-  // Grow trunk + wide branches
-  drawBranch(ctx, canvas.width / 2, canvas.height, 160, Math.PI / 2, 8, 12, 0); // trunk
-  drawBranch(ctx, canvas.width / 2, canvas.height - 100, 140, Math.PI / 2 - 0.3, 7, 10, 1); // left
-  drawBranch(ctx, canvas.width / 2, canvas.height - 100, 140, Math.PI / 2 + 0.3, 7, 10, 2); // right
-  drawBranch(ctx, canvas.width / 2, canvas.height - 200, 120, Math.PI / 2 - 0.6, 6, 9, 3); // far left
-  drawBranch(ctx, canvas.width / 2, canvas.height - 200, 120, Math.PI / 2 + 0.6, 6, 9, 4); // far right
-  drawBranch(ctx, canvas.width / 2, canvas.height - 250, 100, Math.PI / 2, 5, 8, 5); // top
+  // Grow trunk + branches after delay
+  setTimeout(() => {
+    drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2, 8, 18); // trunk
+    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3, 6, 12, services[0]); // Branding left
+    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3, 6, 12, services[1]); // Web right
+    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6, 5, 11, services[2]); // Mobile far left
+    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6, 5, 11, services[3]); // Digital far right
+    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45, 5, 10, services[4]); // Media upper left
+    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45, 5, 10, services[5]); // Strategy upper right
+  }, 1500);
+
+  // Continuous sway effect
+  let swayAngle = 0;
+  function sway() {
+    swayAngle += 0.01;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    animateRoots(ctx, canvas.width / 2, canvas.height);
+    drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2 + Math.sin(swayAngle) * 0.05, 8, 18);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[0]);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[1]);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[2]);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[3]);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[4]);
+    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[5]);
+    requestAnimationFrame(sway);
+  }
+  setTimeout(sway, 2500);
 }
 
 window.addEventListener('load', growTree);
