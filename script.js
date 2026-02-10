@@ -131,6 +131,14 @@ toggle?.addEventListener('click', () => {
 });
 
 /* Growth Tree Animation */
+const services = [
+  "Branding & Design",
+  "Web Development",
+  "Mobile Apps",
+  "Digital Marketing",
+  "Media Production",
+  "Business Strategy"
+];
 const treeSvg = document.querySelector('.growth-svg');
 const paths = treeSvg?.querySelectorAll('.trunk, .branch');
 const labels = treeSvg?.querySelectorAll('.label');
@@ -185,3 +193,42 @@ window.addEventListener('scroll', () => {
     }, 5500);
   }
 });
+function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceIndex = 0) {
+  if (depth === 0) return;
+
+  // Draw branch
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+  const endX = startX + length * Math.cos(angle);
+  const endY = startY - length * Math.sin(angle);
+  ctx.lineTo(endX, endY);
+  ctx.strokeStyle = '#654321';
+  ctx.lineWidth = branchWidth;
+  ctx.stroke();
+
+  // Leaves at shallow depth
+  if (depth < 3) {
+    ctx.beginPath();
+    ctx.arc(endX, endY, 6, 0, Math.PI * 2);
+    ctx.fillStyle = depth % 2 === 0 ? '#2ecc71' : '#27ae60';
+    ctx.fill();
+  }
+
+  // Fruits + labels at tips
+  if (depth === 1 && serviceIndex < services.length) {
+    ctx.beginPath();
+    ctx.arc(endX, endY, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#f2c94c';
+    ctx.fill();
+
+    ctx.fillStyle = '#333';
+    ctx.font = '16px Montserrat';
+    ctx.fillText(services[serviceIndex], endX + 10, endY);
+  }
+
+  // Recursive branches with incremented service index
+  setTimeout(() => {
+    drawBranch(ctx, endX, endY, length * 0.7, angle - 0.3, depth - 1, branchWidth * 0.7, serviceIndex + 1);
+    drawBranch(ctx, endX, endY, length * 0.7, angle + 0.3, depth - 1, branchWidth * 0.7, serviceIndex + 1);
+  }, 400);
+}
