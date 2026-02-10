@@ -130,122 +130,12 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Animated Growth Tree with roots, trunk, branches, leaves, and service labels */
+document.addEventListener("DOMContentLoaded", () => {
+  const services = document.querySelectorAll(".service");
 
-function drawRoots(ctx, startX, startY) {
-  ctx.strokeStyle = '#8B4513';
-  ctx.lineWidth = 6;
-  ctx.lineCap = 'round';
-
-  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
-  rootAngles.forEach(angle => {
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    const endX = startX + 120 * Math.cos(angle);
-    const endY = startY - 80 * Math.sin(angle);
-    ctx.lineTo(endX, endY);
-    ctx.stroke();
+  services.forEach((service, i) => {
+    setTimeout(() => {
+      service.style.opacity = 1;
+    }, 3800 + i * 300);
   });
-
-  // Root label
-  ctx.fillStyle = '#333';
-  ctx.font = '18px Montserrat';
-  ctx.textAlign = 'center';
-  ctx.fillText("Strengthening Root of Business by Branding", startX, startY + 30);
-}
-
-function growTree() {
-  const canvas = document.getElementById('treeCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = 600;
-
-  const trunkTopX = canvas.width / 2;
-  const trunkBottomY = canvas.height;
-  const trunkHeight = 200;
-
-  const services = [
-    "Branding & Design",
-    "Web Development",
-    "Mobile Apps",
-    "Digital Marketing",
-    "Media Production",
-    "Business Strategy"
-  ];
-
-  const branches = [
-    { length: 150, angle: Math.PI/2 - 0.3, width: 14, label: services[0] },
-    { length: 150, angle: Math.PI/2 + 0.3, width: 14, label: services[1] },
-    { length: 130, angle: Math.PI/2 - 0.6, width: 12, label: services[2] },
-    { length: 130, angle: Math.PI/2 + 0.6, width: 12, label: services[3] },
-    { length: 110, angle: Math.PI/2 - 0.45, width: 11, label: services[4] },
-    { length: 110, angle: Math.PI/2 + 0.45, width: 11, label: services[5] }
-  ];
-
-  let progress = 0; // animation progress
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw roots
-    drawRoots(ctx, trunkTopX, trunkBottomY);
-
-    // Draw trunk gradually
-    const trunkCurrentHeight = Math.min(progress, trunkHeight);
-    ctx.beginPath();
-    ctx.moveTo(trunkTopX, trunkBottomY);
-    ctx.lineTo(trunkTopX, trunkBottomY - trunkCurrentHeight);
-    ctx.strokeStyle = '#4a2c0a';
-    ctx.lineWidth = 20;
-    ctx.stroke();
-
-    const trunkTopY = trunkBottomY - trunkCurrentHeight;
-
-    // Draw branches gradually
-    if (progress > trunkHeight) {
-      const branchProgress = progress - trunkHeight;
-      branches.forEach((b, i) => {
-        if (branchProgress > i * 40) { // stagger branch growth
-          const endX = trunkTopX + b.length * Math.cos(b.angle);
-          const endY = trunkTopY - b.length * Math.sin(b.angle);
-
-          ctx.beginPath();
-          ctx.moveTo(trunkTopX, trunkTopY);
-          ctx.lineTo(endX, endY);
-          ctx.strokeStyle = '#4a2c0a';
-          ctx.lineWidth = b.width;
-          ctx.stroke();
-
-          // Leaves appear after branch grows
-          if (branchProgress > i * 40 + 20) {
-            for (let j = 0; j < 6; j++) {
-              const lx = endX + Math.random() * 30 - 15;
-              const ly = endY + Math.random() * 30 - 15;
-              ctx.beginPath();
-              ctx.arc(lx, ly, 6, 0, Math.PI * 2);
-              ctx.fillStyle = j % 2 === 0 ? '#2ecc71' : '#27ae60';
-              ctx.fill();
-            }
-          }
-
-          // Service label appears last
-          if (branchProgress > i * 40 + 40) {
-            ctx.fillStyle = '#333';
-            ctx.font = '16px Montserrat';
-            ctx.textAlign = 'left';
-            ctx.fillText(b.label, endX + 14, endY);
-          }
-        }
-      });
-    }
-
-    progress += 2; // speed of growth
-    if (progress < trunkHeight + branches.length * 80) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  animate();
-}
-
-window.addEventListener('load', growTree);
+});
