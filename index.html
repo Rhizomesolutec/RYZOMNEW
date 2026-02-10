@@ -1,130 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ryzom Consultancy</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <title>RYZOM — Rhizome Solutec | Cultivating Excellence in Every Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Branding, web & software, digital marketing, media production, and business strategy delivered with a network-inspired tech identity." />
+  <meta name="theme-color" content="#2F80EC" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&family=Cascadia+Code:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <div class="brand">
-        <img src="logo.png" alt="Ryzom Logo" class="brand-logo">
-        <div>
-          <div class="brand-name">Ryzom</div>
-          <div class="brand-sub">Roots to Growth</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <a href="#growth-tree">Growth Tree</a>
-        <a href="#showcase">Showcase</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <h1>From <span class="typing">Roots</span><span class="cursor">|</span> to Growth</h1>
-        <p>We help businesses grow organically from their foundations.</p>
-        <div class="hero-actions">
-          <a href="#growth-tree" class="btn btn-primary">Explore Tree</a>
-          <a href="#contact" class="btn btn-outline">Contact Us</a>
-        </div>
-      </div>
-      <div class="hero-logo">
-        <img src="hero-image.jpg" alt="Hero Graphic">
-      </div>
-    </div>
-  </section>
+<!-- Background layers -->
+<canvas id="network-canvas" aria-hidden="true"></canvas>
+<div class="watermark" aria-hidden="true"></div>
 
-  <!-- GROWTH TREE -->
-  <section id="growth-tree" class="section">
-    <div class="container">
-      <canvas id="treeCanvas"></canvas>
-    </div>
-  </section>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="#" class="brand">
+      <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+      <div class="brand-text">
+        <span class="brand-name">RYZOM</span>
+        <span class="brand-sub">Rhizome Solutec</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="btn btn-primary">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
-  <!-- SHOWCASE -->
-  <section id="showcase" class="section alt">
-    <div class="container">
-      <h2>Our Showcase</h2>
-      <div class="showcase">
-        <figure class="showcase-item">
-          <img src="project1.jpg" alt="Project 1">
-          <figcaption>Branding & Design</figcaption>
-        </figure>
-        <figure class="showcase-item">
-          <img src="project2.jpg" alt="Project 2">
-          <figcaption>Web Development</figcaption>
-        </figure>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><img src="Hero.jpeg" alt="Hero background" class="hero-bg-img" /></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="fade-up">
+        From strong roots to connected growth.<br />
+        <span class="typing"><span id="typing-words"></span><span class="cursor">|</span></span>
+      </h1>
+      <p class="fade-up delay-1">We craft branding, build web & mobile, power digital marketing, produce media, and design strategies that scale—organically and intelligently.</p>
+      <div class="hero-actions fade-up delay-2">
+        <a href="#services" class="btn btn-gradient">Explore services</a>
+        <a href="#work" class="btn btn-outline">See our work</a>
       </div>
     </div>
-  </section>
+    <div class="hero-media"><img src="company-logo.png" alt="RYZOM mark" class="hero-logo lift" /></div>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About Us</h2>
-      <div class="about-grid">
-        <div class="about-card">
-          <h3>Our Vision</h3>
-          <p>We believe every business grows from strong roots.</p>
-        </div>
-        <div class="about-card">
-          <h3>Our Mission</h3>
-          <p>Helping clients grow sustainably with digital solutions.</p>
-        </div>
+<!-- GROWTH TREE -->
+<section id="growth-tree" class="section">
+  <div class="container">
+    <canvas id="treeCanvas"></canvas>
+  </div>
+</section>
+
+<!-- SERVICES TIMELINE -->
+<section id="services" class="section">
+  <!-- … your services timeline content … -->
+</section>
+
+<!-- WORK -->
+<section id="work" class="section alt">
+  <!-- … your showcase content … -->
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <!-- … your about content … -->
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section alt">
+  <!-- … your contact form and meta … -->
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+      <div>
+        <strong>RYZOM — Rhizome Solutec</strong>
+        <div class="sub">Cultivating excellence in every solutions</div>
       </div>
     </div>
-  </section>
+    <nav class="footer-nav">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="footer-legal"><span>© <span id="year"></span> RYZOM. All rights reserved.</span></div>
+  </div>
+</footer>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section alt">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <form class="contact-form">
-        <div class="form-row">
-          <div class="form-field">
-            <label>Name</label>
-            <input type="text" required>
-          </div>
-          <div class="form-field">
-            <label>Email</label>
-            <input type="email" required>
-          </div>
-        </div>
-        <div class="form-field full">
-          <label>Message</label>
-          <textarea rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-gradient">Send</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <img src="logo.png" alt="Ryzom Logo" class="brand-logo">
-        <span>Ryzom Consultancy</span>
-      </div>
-      <nav class="footer-nav">
-        <a href="#growth-tree">Tree</a>
-        <a href="#showcase">Showcase</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="footer-legal">&copy; <span id="year"></span> Ryzom Consultancy</div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+<!-- SCRIPTS -->
+<script src="script.js"></script>
 </body>
 </html>
