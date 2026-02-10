@@ -130,7 +130,7 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Growth Tree Animation */
+/* Canvas Growth Tree Animation */
 const services = [
   "Branding & Design",
   "Web Development",
@@ -139,60 +139,7 @@ const services = [
   "Media Production",
   "Business Strategy"
 ];
-const treeSvg = document.querySelector('.growth-svg');
-const paths = treeSvg?.querySelectorAll('.trunk, .branch');
-const labels = treeSvg?.querySelectorAll('.label');
-const leaves = treeSvg?.querySelectorAll('.leaf');
-const fruits = treeSvg?.querySelectorAll('.fruit');
 
-window.addEventListener('scroll', () => {
-  if (!treeSvg) return;
-  const treePos = treeSvg.getBoundingClientRect().top;
-  const winHeight = window.innerHeight;
-
-  if (treePos < winHeight - 100) {
-    // Draw trunk first
-    const trunk = treeSvg.querySelector('.trunk');
-    trunk.style.animation = 'draw 1.5s forwards';
-
-    // Branches staggered
-    paths.forEach((path, i) => {
-      if (path.classList.contains('branch')) {
-        path.style.animation = `draw 1.2s forwards ${i * 0.6 + 1.5}s`;
-      }
-    });
-
-    // Leaves sprout after branches
-    leaves.forEach((leaf, i) => {
-      setTimeout(() => {
-        leaf.style.opacity = 1;
-        leaf.style.animation = 'sprout 0.8s ease-out forwards';
-      }, 2500 + i * 300);
-    });
-
-    // Fruits appear later
-    fruits.forEach((fruit, i) => {
-      setTimeout(() => {
-        fruit.style.opacity = 1;
-        fruit.style.transform = 'scale(1)';
-      }, 3500 + i * 400);
-    });
-
-    // Labels fade in last
-    labels.forEach((label, i) => {
-      setTimeout(() => {
-        label.style.opacity = 1;
-      }, 4500 + i * 500);
-    });
-
-    // Continuous sway after everything
-    setTimeout(() => {
-      treeSvg.querySelectorAll('.branch, .leaf, .fruit').forEach(el => {
-        el.style.animation = 'sway 4s ease-in-out infinite';
-      });
-    }, 5500);
-  }
-});
 function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceIndex = 0) {
   if (depth === 0) return;
 
@@ -232,3 +179,15 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
     drawBranch(ctx, endX, endY, length * 0.7, angle + 0.3, depth - 1, branchWidth * 0.7, serviceIndex + 1);
   }, 400);
 }
+
+function growTree() {
+  const canvas = document.getElementById('treeCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Start trunk with service mapping
+  drawBranch(ctx, canvas.width / 2, canvas.height, 120, Math.PI / 2, 8, 10, 0);
+}
+
+window.addEventListener('load', growTree);
