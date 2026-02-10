@@ -66,101 +66,12 @@ a{color:var(--text);text-decoration:none}
 .section.alt{background:linear-gradient(180deg,#0b0d12 0%,#0e1016 100%)}
 .section-head h2{font-size:clamp(32px,4vw,48px);margin:0 0 10px}
 .section-head p{color:var(--muted);margin:0}
-/* GROWTH TREE (SVG version) */
-.growth-svg {
-  width: 100%;
-  max-width: 600px;
-  display: block;
-  margin: 40px auto;
-}
 
-.trunk, .branch {
-  fill: none;
-  stroke: #654321; /* brown trunk/branches */
-  stroke-width: 6;
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  animation: none;
-}
-.branch {
-  stroke-width: 4;
-}
-
-.roots {
-  font-style: italic;
-  fill: #777;
-  font-size: 14px;
-}
-
-.label {
-  font-family: Montserrat, sans-serif;
-  font-weight: 600;
-  fill: #2F80EC;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.leaf {
-  fill: #2ecc71; /* green leaves */
-  opacity: 0;
-  transform: scale(0);
-  transform-origin: center;
-}
-
-.fruit {
-  fill: #f2c94c; /* golden fruits */
-  opacity: 0;
-  transform: scale(0);
-  transform-origin: center;
-}
-
-/* Animations */
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes sprout {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes sway {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(1deg); }
-  50%  { transform: rotate(0deg); }
-  75%  { transform: rotate(-1deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* Ensure sway applies smoothly */
-.branch, .leaf, .fruit {
-  transform-origin: center;
-}
-.leaf {
-  fill: var(--green-light);
-  opacity: 0;
-  transform: scale(0);
-  transform-origin: center;
-}
-.leaf.alt {
-  fill: var(--green);
-}
-@keyframes shimmer {
-  0%   { fill: var(--green); }
-  50%  { fill: var(--green-light); }
-  100% { fill: var(--green); }
-}
-.leaf, .leaf.alt {
-  animation: shimmer 6s ease-in-out infinite alternate;
-}
-}
 #treeCanvas {
   width: 100%;
-  height: 100%;
+  height: 600px;
   display: block;
 }
-
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:60px;position:relative;margin-top:40px;padding-left:80px}
 .timeline::before{content:"";position:absolute;left:40px;top:0;bottom:0;width:4px;background:linear-gradient(var(--blue),var(--purple))}
