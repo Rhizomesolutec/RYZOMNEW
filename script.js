@@ -224,4 +224,13 @@ function growTree() {
 
     // redraw branches with sway
     branches.forEach(b => {
-      drawBranch(ctx, canvas.width / 2, canvas.height, b.length, b.angle + Math.sin(swayAngle) * 0.05
+      drawBranch(ctx, canvas.width / 2, canvas.height, b.length, b.angle + Math.sin(swayAngle) * 0.05, b.width, b.label);
+    });
+
+    requestAnimationFrame(sway);
+  }
+  sway();
+}
+
+window.addEventListener('load', growTree);
+``
