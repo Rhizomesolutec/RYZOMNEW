@@ -55,11 +55,84 @@
       <div class="hero-media"><img src="company-logo.png" alt="RYZOM mark" class="hero-logo lift" /></div>
     </div>
     </section>
-<section id="growth-tree" class="section">
-  <div class="container">
-    <canvas id="treeCanvas"></canvas>
-  </div>
-</section>
+<div class="tree-container">
+<svg viewBox="0 0 800 900" class="tree-svg" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ROOTS -->
+  <path id="roots" class="draw roots"
+    d="M400 820
+       C340 850 300 880 250 900
+       M400 820
+       C460 850 520 880 580 900
+       M400 820
+       C380 860 360 890 340 900" />
+
+  <!-- ROOT TEXT -->
+  <text x="400" y="860" text-anchor="middle" class="root-text">
+    Strengthening Root of Business by Branding
+  </text>
+
+  <!-- TRUNK -->
+  <path id="trunk" class="draw trunk"
+    d="M400 820
+       C390 700 395 600 400 500
+       C405 420 410 360 400 300" />
+
+  <!-- BRANCHES -->
+  <a href="/branding">
+    <path class="draw branch"
+      d="M400 480
+         C300 430 240 380 190 330" />
+    <text x="170" y="320" class="service">Branding</text>
+  </a>
+
+  <a href="/designing">
+    <path class="draw branch"
+      d="M400 460
+         C520 420 600 380 650 330" />
+    <text x="670" y="320" class="service">Designing</text>
+  </a>
+
+  <a href="/media-productions">
+    <path class="draw branch"
+      d="M400 420
+         C330 350 300 290 270 230" />
+    <text x="250" y="220" class="service">Media Productions</text>
+  </a>
+
+  <a href="/digital-marketing">
+    <path class="draw branch"
+      d="M400 420
+         C470 350 520 290 560 230" />
+    <text x="580" y="220" class="service">Digital Marketing</text>
+  </a>
+
+  <a href="/web-app-development">
+    <path class="draw branch"
+      d="M400 360
+         C360 270 350 200 330 140" />
+    <text x="310" y="130" class="service">Web & App Development</text>
+  </a>
+
+  <a href="/business-strategy">
+    <path class="draw branch"
+      d="M400 360
+         C440 270 470 200 500 140" />
+    <text x="520" y="130" class="service">Business Strategy</text>
+  </a>
+
+  <!-- LEAF CLUSTERS -->
+  <g class="leaves">
+    <circle cx="190" cy="310" r="18"/>
+    <circle cx="650" cy="310" r="18"/>
+    <circle cx="270" cy="210" r="20"/>
+    <circle cx="560" cy="210" r="20"/>
+    <circle cx="330" cy="120" r="22"/>
+    <circle cx="500" cy="120" r="22"/>
+  </g>
+
+</svg>
+</div>
   <!-- SERVICES TIMELINE -->
   <section id="services" class="section">
     <div class="container">
