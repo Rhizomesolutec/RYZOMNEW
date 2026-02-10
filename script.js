@@ -202,7 +202,7 @@ function growTree() {
   // Draw static roots
   drawRoots(ctx, canvas.width / 2, canvas.height);
 
-  // Branch definitions (fixed services)
+  // Branch definitions
   const branches = [
     { length: 200, angle: Math.PI/2, width: 20 }, // trunk
     { length: 150, angle: Math.PI/2 - 0.3, width: 14, label: services[0] },
