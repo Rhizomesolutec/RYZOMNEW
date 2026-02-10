@@ -130,7 +130,7 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Growth Tree with roots, trunk, 6 branches, leaves, and service labels */
+/* Animated Growth Tree with roots, trunk, branches, leaves, and service labels */
 
 function drawRoots(ctx, startX, startY) {
   ctx.strokeStyle = '#8B4513';
@@ -141,8 +141,8 @@ function drawRoots(ctx, startX, startY) {
   rootAngles.forEach(angle => {
     ctx.beginPath();
     ctx.moveTo(startX, startY);
-    const endX = startX + 150 * Math.cos(angle);
-    const endY = startY - 100 * Math.sin(angle);
+    const endX = startX + 120 * Math.cos(angle);
+    const endY = startY - 80 * Math.sin(angle);
     ctx.lineTo(endX, endY);
     ctx.stroke();
   });
@@ -154,57 +154,16 @@ function drawRoots(ctx, startX, startY) {
   ctx.fillText("Strengthening Root of Business by Branding", startX, startY + 30);
 }
 
-function drawBranch(ctx, startX, startY, length, angle, branchWidth, serviceLabel) {
-  const endX = startX + length * Math.cos(angle);
-  const endY = startY - length * Math.sin(angle);
-
-  ctx.beginPath();
-  ctx.moveTo(startX, startY);
-  ctx.lineTo(endX, endY);
-  ctx.strokeStyle = '#4a2c0a';
-  ctx.lineWidth = branchWidth;
-  ctx.lineCap = 'round';
-  ctx.stroke();
-
-  // Scatter leaves along branch
-  const leafCount = Math.floor(length / 25);
-  for (let i = 1; i <= leafCount; i++) {
-    const lx = startX + (length * i / leafCount) * Math.cos(angle);
-    const ly = startY - (length * i / leafCount) * Math.sin(angle);
-    ctx.beginPath();
-    ctx.arc(lx, ly, 6, 0, Math.PI * 2);
-    ctx.fillStyle = i % 2 === 0 ? '#2ecc71' : '#27ae60';
-    ctx.fill();
-  }
-
-  // Service label at branch end
-  ctx.fillStyle = '#333';
-  ctx.font = '16px Montserrat';
-  ctx.textAlign = 'left';
-  ctx.fillText(serviceLabel, endX + 14, endY);
-}
-
 function growTree() {
   const canvas = document.getElementById('treeCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = 600;
 
-  // Draw roots
-  drawRoots(ctx, canvas.width / 2, canvas.height);
-
-  // Draw trunk
-  ctx.beginPath();
-  ctx.moveTo(canvas.width / 2, canvas.height);
-  ctx.lineTo(canvas.width / 2, canvas.height - 200);
-  ctx.strokeStyle = '#4a2c0a';
-  ctx.lineWidth = 20;
-  ctx.stroke();
-
   const trunkTopX = canvas.width / 2;
-  const trunkTopY = canvas.height - 200;
+  const trunkBottomY = canvas.height;
+  const trunkHeight = 200;
 
-  // Services
   const services = [
     "Branding & Design",
     "Web Development",
@@ -214,7 +173,6 @@ function growTree() {
     "Business Strategy"
   ];
 
-  // Branch definitions
   const branches = [
     { length: 150, angle: Math.PI/2 - 0.3, width: 14, label: services[0] },
     { length: 150, angle: Math.PI/2 + 0.3, width: 14, label: services[1] },
@@ -224,31 +182,70 @@ function growTree() {
     { length: 110, angle: Math.PI/2 + 0.45, width: 11, label: services[5] }
   ];
 
-  // Animate sway
-  let swayAngle = 0;
-  function sway() {
-    swayAngle += 0.01;
+  let progress = 0; // animation progress
+
+  function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // redraw roots
-    drawRoots(ctx, canvas.width / 2, canvas.height);
+    // Draw roots
+    drawRoots(ctx, trunkTopX, trunkBottomY);
 
-    // redraw trunk
+    // Draw trunk gradually
+    const trunkCurrentHeight = Math.min(progress, trunkHeight);
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height);
-    ctx.lineTo(canvas.width / 2, canvas.height - 200);
+    ctx.moveTo(trunkTopX, trunkBottomY);
+    ctx.lineTo(trunkTopX, trunkBottomY - trunkCurrentHeight);
     ctx.strokeStyle = '#4a2c0a';
     ctx.lineWidth = 20;
     ctx.stroke();
 
-    // redraw branches with sway
-    branches.forEach(b => {
-      drawBranch(ctx, trunkTopX, trunkTopY, b.length, b.angle + Math.sin(swayAngle) * 0.05, b.width, b.label);
-    });
+    const trunkTopY = trunkBottomY - trunkCurrentHeight;
 
-    requestAnimationFrame(sway);
+    // Draw branches gradually
+    if (progress > trunkHeight) {
+      const branchProgress = progress - trunkHeight;
+      branches.forEach((b, i) => {
+        if (branchProgress > i * 40) { // stagger branch growth
+          const endX = trunkTopX + b.length * Math.cos(b.angle);
+          const endY = trunkTopY - b.length * Math.sin(b.angle);
+
+          ctx.beginPath();
+          ctx.moveTo(trunkTopX, trunkTopY);
+          ctx.lineTo(endX, endY);
+          ctx.strokeStyle = '#4a2c0a';
+          ctx.lineWidth = b.width;
+          ctx.stroke();
+
+          // Leaves appear after branch grows
+          if (branchProgress > i * 40 + 20) {
+            for (let j = 0; j < 6; j++) {
+              const lx = endX + Math.random() * 30 - 15;
+              const ly = endY + Math.random() * 30 - 15;
+              ctx.beginPath();
+              ctx.arc(lx, ly, 6, 0, Math.PI * 2);
+              ctx.fillStyle = j % 2 === 0 ? '#2ecc71' : '#27ae60';
+              ctx.fill();
+            }
+          }
+
+          // Service label appears last
+          if (branchProgress > i * 40 + 40) {
+            ctx.fillStyle = '#333';
+            ctx.font = '16px Montserrat';
+            ctx.textAlign = 'left';
+            ctx.fillText(b.label, endX + 14, endY);
+          }
+        }
+      });
+    }
+
+    progress += 2; // speed of growth
+    if (progress < trunkHeight + branches.length * 80) {
+      requestAnimationFrame(animate);
+    }
   }
-  sway();
+
+  animate();
 }
 
 window.addEventListener('load', growTree);
