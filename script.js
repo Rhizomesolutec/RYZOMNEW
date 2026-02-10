@@ -130,38 +130,58 @@ toggle?.addEventListener('click', () => {
   nav.style.display = opened ? 'none' : 'flex';
 });
 
-/* Natural Tree Drawing Functions */
+/* Growth Tree with roots, trunk, 6 branches, leaves, and service labels */
 
-function drawTrunk(ctx, startX, startY, height) {
-  ctx.beginPath();
-  ctx.moveTo(startX, startY);
-  ctx.lineTo(startX, startY - height);
-  ctx.strokeStyle = '#5a3e1b';
-  ctx.lineWidth = 20;
+function drawRoots(ctx, startX, startY) {
+  ctx.strokeStyle = '#8B4513';
+  ctx.lineWidth = 6;
   ctx.lineCap = 'round';
-  ctx.stroke();
+
+  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
+  rootAngles.forEach(angle => {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    const endX = startX + 150 * Math.cos(angle);
+    const endY = startY - 100 * Math.sin(angle);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+  });
+
+  // Root label
+  ctx.fillStyle = '#333';
+  ctx.font = '18px Montserrat';
+  ctx.textAlign = 'center';
+  ctx.fillText("Strengthening Root of Business by Branding", startX, startY + 30);
 }
 
-function drawBranch(ctx, startX, startY, length, angle, width) {
+function drawBranch(ctx, startX, startY, length, angle, branchWidth, serviceLabel) {
   const endX = startX + length * Math.cos(angle);
   const endY = startY - length * Math.sin(angle);
 
   ctx.beginPath();
   ctx.moveTo(startX, startY);
   ctx.lineTo(endX, endY);
-  ctx.strokeStyle = '#5a3e1b';
-  ctx.lineWidth = width;
+  ctx.strokeStyle = '#4a2c0a';
+  ctx.lineWidth = branchWidth;
   ctx.lineCap = 'round';
   ctx.stroke();
 
-  return { x: endX, y: endY };
-}
+  // Scatter leaves along branch
+  const leafCount = Math.floor(length / 25);
+  for (let i = 1; i <= leafCount; i++) {
+    const lx = startX + (length * i / leafCount) * Math.cos(angle);
+    const ly = startY - (length * i / leafCount) * Math.sin(angle);
+    ctx.beginPath();
+    ctx.arc(lx, ly, 6, 0, Math.PI * 2);
+    ctx.fillStyle = i % 2 === 0 ? '#2ecc71' : '#27ae60';
+    ctx.fill();
+  }
 
-function drawLeaf(ctx, x, y) {
-  ctx.beginPath();
-  ctx.arc(x, y, 8, 0, Math.PI * 2);
-  ctx.fillStyle = Math.random() > 0.5 ? '#2ecc71' : '#27ae60';
-  ctx.fill();
+  // Service label at branch end
+  ctx.fillStyle = '#333';
+  ctx.font = '16px Montserrat';
+  ctx.textAlign = 'left';
+  ctx.fillText(serviceLabel, endX + 14, endY);
 }
 
 function growTree() {
@@ -170,19 +190,38 @@ function growTree() {
   canvas.width = window.innerWidth;
   canvas.height = 600;
 
-  // Draw trunk
-  const trunkHeight = 200;
-  const trunkTop = { x: canvas.width / 2, y: canvas.height - trunkHeight };
-  drawTrunk(ctx, canvas.width / 2, canvas.height, trunkHeight);
+  // Draw roots
+  drawRoots(ctx, canvas.width / 2, canvas.height);
 
-  // Branches
+  // Draw trunk
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2, canvas.height);
+  ctx.lineTo(canvas.width / 2, canvas.height - 200);
+  ctx.strokeStyle = '#4a2c0a';
+  ctx.lineWidth = 20;
+  ctx.stroke();
+
+  const trunkTopX = canvas.width / 2;
+  const trunkTopY = canvas.height - 200;
+
+  // Services
+  const services = [
+    "Branding & Design",
+    "Web Development",
+    "Mobile Apps",
+    "Digital Marketing",
+    "Media Production",
+    "Business Strategy"
+  ];
+
+  // Branch definitions
   const branches = [
-    { angle: Math.PI / 2 - 0.3, length: 120, width: 12 },
-    { angle: Math.PI / 2 + 0.3, length: 120, width: 12 },
-    { angle: Math.PI / 2 - 0.6, length: 100, width: 10 },
-    { angle: Math.PI / 2 + 0.6, length: 100, width: 10 },
-    { angle: Math.PI / 2 - 0.45, length: 80, width: 8 },
-    { angle: Math.PI / 2 + 0.45, length: 80, width: 8 }
+    { length: 150, angle: Math.PI/2 - 0.3, width: 14, label: services[0] },
+    { length: 150, angle: Math.PI/2 + 0.3, width: 14, label: services[1] },
+    { length: 130, angle: Math.PI/2 - 0.6, width: 12, label: services[2] },
+    { length: 130, angle: Math.PI/2 + 0.6, width: 12, label: services[3] },
+    { length: 110, angle: Math.PI/2 - 0.45, width: 11, label: services[4] },
+    { length: 110, angle: Math.PI/2 + 0.45, width: 11, label: services[5] }
   ];
 
   // Animate sway
@@ -191,26 +230,20 @@ function growTree() {
     swayAngle += 0.01;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Redraw trunk
-    drawTrunk(ctx, canvas.width / 2, canvas.height, trunkHeight);
+    // redraw roots
+    drawRoots(ctx, canvas.width / 2, canvas.height);
 
-    // Redraw branches with sway
+    // redraw trunk
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height);
+    ctx.lineTo(canvas.width / 2, canvas.height - 200);
+    ctx.strokeStyle = '#4a2c0a';
+    ctx.lineWidth = 20;
+    ctx.stroke();
+
+    // redraw branches with sway
     branches.forEach(b => {
-      const branchEnd = drawBranch(
-        ctx,
-        trunkTop.x,
-        trunkTop.y,
-        b.length,
-        b.angle + Math.sin(swayAngle) * 0.05,
-        b.width
-      );
-
-      // Add leaves at branch ends
-      for (let i = 0; i < 5; i++) {
-        const lx = branchEnd.x + Math.random() * 30 - 15;
-        const ly = branchEnd.y + Math.random() * 30 - 15;
-        drawLeaf(ctx, lx, ly);
-      }
+      drawBranch(ctx, trunkTopX, trunkTopY, b.length, b.angle + Math.sin(swayAngle) * 0.05, b.width, b.label);
     });
 
     requestAnimationFrame(sway);
