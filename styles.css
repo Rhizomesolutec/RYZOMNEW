@@ -137,13 +137,23 @@ a{color:var(--text);text-decoration:none}
 .branch, .leaf, .fruit {
   transform-origin: center;
 }
+.leaf {
+  fill: var(--green-light);
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center;
+}
+.leaf.alt {
+  fill: var(--green);
+}
 @keyframes shimmer {
   0%   { fill: var(--green); }
   50%  { fill: var(--green-light); }
   100% { fill: var(--green); }
 }
-.leaf {
+.leaf, .leaf.alt {
   animation: shimmer 6s ease-in-out infinite alternate;
+}
 }
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:60px;position:relative;margin-top:40px;padding-left:80px}
