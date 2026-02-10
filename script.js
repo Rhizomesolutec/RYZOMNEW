@@ -132,38 +132,38 @@ toggle?.addEventListener('click', () => {
 
 /* Canvas Growth Tree with Animated Roots + Fatty Branches + Sway */
 const services = [
-  "Branding & Design",      // left branch
-  "Web Development",        // right branch
-  "Mobile Apps",            // far left
-  "Digital Marketing",      // far right
-  "Media Production",       // upper left
-  "Business Strategy"       // upper right
+  "Branding & Design",
+  "Web Development",
+  "Mobile Apps",
+  "Digital Marketing",
+  "Media Production",
+  "Business Strategy"
 ];
 
-function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serviceLabel = null) {
+function drawBranch(ctx, x, y, length, angle, depth, width, label, sway = 0) {
   if (depth === 0) return;
 
-  // Branch line (thicker)
+  const endX = x + length * Math.cos(angle + sway);
+  const endY = y - length * Math.sin(angle + sway);
+
   ctx.beginPath();
-  ctx.moveTo(startX, startY);
-  const endX = startX + length * Math.cos(angle);
-  const endY = startY - length * Math.sin(angle);
+  ctx.moveTo(x, y);
   ctx.lineTo(endX, endY);
   ctx.strokeStyle = '#4a2c0a';
-  ctx.lineWidth = branchWidth;
+  ctx.lineWidth = width;
   ctx.lineCap = 'round';
   ctx.stroke();
 
-  // Leaves
-  if (depth < 3) {
+  // leaves
+  if (depth <= 2) {
     ctx.beginPath();
     ctx.arc(endX, endY, 7, 0, Math.PI * 2);
-    ctx.fillStyle = depth % 2 === 0 ? '#2ecc71' : '#27ae60';
+    ctx.fillStyle = '#2ecc71';
     ctx.fill();
   }
 
-  // Fruits + labels at tips
-  if (depth === 1 && serviceLabel) {
+  // fruit + label
+  if (depth === 1 && label) {
     ctx.beginPath();
     ctx.arc(endX, endY, 11, 0, Math.PI * 2);
     ctx.fillStyle = '#f2c94c';
@@ -171,81 +171,69 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
 
     ctx.fillStyle = '#333';
     ctx.font = '16px Montserrat';
-    ctx.fillText(serviceLabel, endX + 14, endY);
+    ctx.fillText(label, endX + 14, endY);
   }
 
-  // Recursive branches
-  setTimeout(() => {
-    drawBranch(ctx, endX, endY, length * 0.8, angle - 0.35, depth - 1, branchWidth * 0.75, serviceLabel);
-    drawBranch(ctx, endX, endY, length * 0.8, angle + 0.35, depth - 1, branchWidth * 0.75, serviceLabel);
-  }, 400);
+  drawBranch(ctx, endX, endY, length * 0.78, angle - 0.35, depth - 1, width * 0.75, label, sway);
+  drawBranch(ctx, endX, endY, length * 0.78, angle + 0.35, depth - 1, width * 0.75, label, sway);
 }
 
-function animateRoots(ctx, startX, startY, callback) {
+function drawRoots(ctx, x, y) {
   ctx.strokeStyle = '#8B4513';
   ctx.lineWidth = 6;
   ctx.lineCap = 'round';
-  ctx.shadowColor = 'rgba(139,69,19,0.6)';
-  ctx.shadowBlur = 15;
 
-  const rootAngles = [Math.PI * 1.1, Math.PI * 1.25, Math.PI * 0.85, Math.PI * 0.75];
-  let step = 0;
+  const angles = [1.1, 1.25, 0.85, 0.75].map(a => a * Math.PI);
 
-  function growRoots() {
-    rootAngles.forEach(angle => {
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      const endX = startX + step * Math.cos(angle);
-      const endY = startY - step * Math.sin(angle);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
-    });
-    step += 4;
-    if (step < 150) {
-      requestAnimationFrame(growRoots);
-    } else {
-      callback(); // after roots finish, grow tree
-    }
-  }
-  growRoots();
+  angles.forEach(a => {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(
+      x + 140 * Math.cos(a),
+      y - 140 * Math.sin(a)
+    );
+    ctx.stroke();
+  });
 }
 
 function growTree() {
   const canvas = document.getElementById('treeCanvas');
   const ctx = canvas.getContext('2d');
+
   canvas.width = window.innerWidth;
   canvas.height = 600;
 
-  // Phase 1: animate roots
-  animateRoots(ctx, canvas.width / 2, canvas.height, () => {
-    // Phase 2: grow trunk + branches
-    drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2, 8, 18); // trunk
-    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3, 6, 12, services[0]); // Branding left
-    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3, 6, 12, services[1]); // Web right
-    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6, 5, 11, services[2]); // Mobile far left
-    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6, 5, 11, services[3]); // Digital far right
-    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45, 5, 10, services[4]); // Media upper left
-    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45, 5, 10, services[5]); // Strategy upper right
+  const baseX = canvas.width / 2;
+  const baseY = canvas.height;
 
-    // Phase 3: sway animation
-    let swayAngle = 0;
-    function sway() {
-      swayAngle += 0.01;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // redraw roots (static)
-      animateRoots(ctx, canvas.width / 2, canvas.height, () => {});
-      // redraw trunk + branches with sway
-      drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2 + Math.sin(swayAngle) * 0.05, 8, 18);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[0]);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[1]);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[2]);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[3]);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[4]);
-      drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[5]);
-      requestAnimationFrame(sway);
-    }
-    sway();
-  });
+  let sway = 0;
+
+  function animate() {
+    sway += 0.01;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // static roots
+    drawRoots(ctx, baseX, baseY);
+
+    const swayOffset = Math.sin(sway) * 0.05;
+
+    // trunk
+    drawBranch(ctx, baseX, baseY, 200, Math.PI / 2, 8, 18, null, swayOffset);
+
+    // main branches
+    drawBranch(ctx, baseX, baseY - 120, 150, Math.PI / 2 - 0.3, 6, 12, services[0], swayOffset);
+    drawBranch(ctx, baseX, baseY - 120, 150, Math.PI / 2 + 0.3, 6, 12, services[1], swayOffset);
+
+    drawBranch(ctx, baseX, baseY - 200, 130, Math.PI / 2 - 0.6, 5, 11, services[2], swayOffset);
+    drawBranch(ctx, baseX, baseY - 200, 130, Math.PI / 2 + 0.6, 5, 11, services[3], swayOffset);
+
+    drawBranch(ctx, baseX, baseY - 260, 110, Math.PI / 2 - 0.45, 5, 10, services[4], swayOffset);
+    drawBranch(ctx, baseX, baseY - 260, 110, Math.PI / 2 + 0.45, 5, 10, services[5], swayOffset);
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
 
 window.addEventListener('load', growTree);
