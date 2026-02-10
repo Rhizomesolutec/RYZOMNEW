@@ -69,7 +69,7 @@ a{color:var(--text);text-decoration:none}
 
 #treeCanvas {
   width: 100%;
-  height: 600px;
+  height: 70vh; /* responsive height */
   display: block;
 }
 /* TIMELINE */
