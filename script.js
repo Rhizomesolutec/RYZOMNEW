@@ -149,7 +149,7 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
   const endX = startX + length * Math.cos(angle);
   const endY = startY - length * Math.sin(angle);
   ctx.lineTo(endX, endY);
-  ctx.strokeStyle = '#4a2c0a'; // darker brown
+  ctx.strokeStyle = '#4a2c0a';
   ctx.lineWidth = branchWidth;
   ctx.lineCap = 'round';
   ctx.stroke();
@@ -181,7 +181,7 @@ function drawBranch(ctx, startX, startY, length, angle, depth, branchWidth, serv
   }, 400);
 }
 
-function animateRoots(ctx, startX, startY) {
+function animateRoots(ctx, startX, startY, callback) {
   ctx.strokeStyle = '#8B4513';
   ctx.lineWidth = 6;
   ctx.lineCap = 'round';
@@ -192,7 +192,6 @@ function animateRoots(ctx, startX, startY) {
   let step = 0;
 
   function growRoots() {
-    ctx.clearRect(0, startY - 120, ctx.canvas.width, 120); // clear root area
     rootAngles.forEach(angle => {
       ctx.beginPath();
       ctx.moveTo(startX, startY);
@@ -202,7 +201,11 @@ function animateRoots(ctx, startX, startY) {
       ctx.stroke();
     });
     step += 4;
-    if (step < 150) requestAnimationFrame(growRoots);
+    if (step < 150) {
+      requestAnimationFrame(growRoots);
+    } else {
+      callback(); // after roots finish, grow tree
+    }
   }
   growRoots();
 }
@@ -213,11 +216,9 @@ function growTree() {
   canvas.width = window.innerWidth;
   canvas.height = 600;
 
-  // Animate roots first
-  animateRoots(ctx, canvas.width / 2, canvas.height);
-
-  // Grow trunk + branches after delay
-  setTimeout(() => {
+  // Phase 1: animate roots
+  animateRoots(ctx, canvas.width / 2, canvas.height, () => {
+    // Phase 2: grow trunk + branches
     drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2, 8, 18); // trunk
     drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3, 6, 12, services[0]); // Branding left
     drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3, 6, 12, services[1]); // Web right
@@ -225,24 +226,26 @@ function growTree() {
     drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6, 5, 11, services[3]); // Digital far right
     drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45, 5, 10, services[4]); // Media upper left
     drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45, 5, 10, services[5]); // Strategy upper right
-  }, 1500);
 
-  // Continuous sway effect
-  let swayAngle = 0;
-  function sway() {
-    swayAngle += 0.01;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    animateRoots(ctx, canvas.width / 2, canvas.height);
-    drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2 + Math.sin(swayAngle) * 0.05, 8, 18);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[0]);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[1]);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[2]);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[3]);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[4]);
-    drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[5]);
-    requestAnimationFrame(sway);
-  }
-  setTimeout(sway, 2500);
+    // Phase 3: sway animation
+    let swayAngle = 0;
+    function sway() {
+      swayAngle += 0.01;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // redraw roots (static)
+      animateRoots(ctx, canvas.width / 2, canvas.height, () => {});
+      // redraw trunk + branches with sway
+      drawBranch(ctx, canvas.width / 2, canvas.height, 200, Math.PI / 2 + Math.sin(swayAngle) * 0.05, 8, 18);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 - 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[0]);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 120, 150, Math.PI / 2 + 0.3 + Math.sin(swayAngle) * 0.05, 6, 12, services[1]);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 - 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[2]);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 200, 130, Math.PI / 2 + 0.6 + Math.sin(swayAngle) * 0.05, 5, 11, services[3]);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 - 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[4]);
+      drawBranch(ctx, canvas.width / 2, canvas.height - 260, 110, Math.PI / 2 + 0.45 + Math.sin(swayAngle) * 0.05, 5, 10, services[5]);
+      requestAnimationFrame(sway);
+    }
+    sway();
+  });
 }
 
 window.addEventListener('load', growTree);
