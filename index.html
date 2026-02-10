@@ -13,98 +13,264 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Background layers -->
+  <canvas id="network-canvas" aria-hidden="true"></canvas>
+  <div class="watermark" aria-hidden="true"></div>
 
-<!-- Background layers -->
-<canvas id="network-canvas" aria-hidden="true"></canvas>
-<div class="watermark" aria-hidden="true"></div>
-
-<!-- HEADER -->
-<header class="site-header">
-  <div class="container nav-wrap">
-    <a href="#" class="brand">
-      <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
-      <div class="brand-text">
-        <span class="brand-name">RYZOM</span>
-        <span class="brand-sub">Rhizome Solutec</span>
-      </div>
-    </a>
-    <nav class="nav">
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="btn btn-primary">Contact</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"><img src="Hero.jpeg" alt="Hero background" class="hero-bg-img" /></div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <h1 class="fade-up">
-        From strong roots to connected growth.<br />
-        <span class="typing"><span id="typing-words"></span><span class="cursor">|</span></span>
-      </h1>
-      <p class="fade-up delay-1">We craft branding, build web & mobile, power digital marketing, produce media, and design strategies that scale—organically and intelligently.</p>
-      <div class="hero-actions fade-up delay-2">
-        <a href="#services" class="btn btn-gradient">Explore services</a>
-        <a href="#work" class="btn btn-outline">See our work</a>
-      </div>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="brand">
+        <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+        <div class="brand-text">
+          <span class="brand-name">RYZOM</span>
+          <span class="brand-sub">Rhizome Solutec</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn btn-primary">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
-    <div class="hero-media"><img src="company-logo.png" alt="RYZOM mark" class="hero-logo lift" /></div>
-  </div>
-</section>
+  </header>
 
-<!-- GROWTH TREE -->
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"><img src="Hero.jpeg" alt="Hero background" class="hero-bg-img" /></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="fade-up">
+          From strong roots to connected growth.<br />
+          <span class="typing"><span id="typing-words"></span><span class="cursor">|</span></span>
+        </h1>
+        <p class="fade-up delay-1">We craft branding, build web & mobile, power digital marketing, produce media, and design strategies that scale—organically and intelligently.</p>
+        <div class="hero-actions fade-up delay-2">
+          <a href="#services" class="btn btn-gradient">Explore services</a>
+          <a href="#work" class="btn btn-outline">See our work</a>
+        </div>
+      </div>
+      <div class="hero-media"><img src="company-logo.png" alt="RYZOM mark" class="hero-logo lift" /></div>
+    </div>
+  </section>
 <section id="growth-tree" class="section">
   <div class="container">
     <canvas id="treeCanvas"></canvas>
   </div>
 </section>
-
-<!-- SERVICES TIMELINE -->
-<section id="services" class="section">
-  <!-- … your services timeline content … -->
 </section>
-
-<!-- WORK -->
-<section id="work" class="section alt">
-  <!-- … your showcase content … -->
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section">
-  <!-- … your about content … -->
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section alt">
-  <!-- … your contact form and meta … -->
-</section>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
-      <div>
-        <strong>RYZOM — Rhizome Solutec</strong>
-        <div class="sub">Cultivating excellence in every solutions</div>
+    
+  <!-- SERVICES TIMELINE -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Our Services Journey</h2>
+        <p class="fade-up delay-1">From roots to growth — each step builds your brand and business.</p>
+      </div>
+      <div class="timeline">
+        <!-- Branding -->
+        <div class="timeline-item fade-up">
+          <img src="logo-branding.png" alt="Branding & Design" />
+          <div>
+            <h3>Branding & Design</h3>
+            <p>Identity systems, logos, product design, and creative campaigns.</p>
+            <ul>
+              <li>Logo design with multiple variations</li>
+              <li>Complete brand guidelines</li>
+              <li>Marketing collateral (brochures, posters)</li>
+              <li>Product packaging concepts</li>
+            </ul>
+            <p class="case-study"><strong>Case Study:</strong> Helped a retail brand increase recognition by 70% with a refreshed identity.</p>
+          </div>
+        </div>
+        <!-- Web -->
+        <div class="timeline-item fade-up delay-1">
+          <img src="logo-web.png" alt="Web Development" />
+          <div>
+            <h3>Web Development</h3>
+            <p>Responsive websites, web apps, and integrations.</p>
+            <ul>
+              <li>Corporate and e-commerce websites</li>
+              <li>Interactive dashboards and portals</li>
+              <li>API integrations and automation</li>
+              <li>Performance optimization</li>
+            </ul>
+            <p class="stats">🚀 120+ websites launched successfully</p>
+          </div>
+        </div>
+        <!-- Mobile -->
+        <div class="timeline-item fade-up delay-2">
+          <img src="logo-mobileapp.png" alt="Mobile Apps" />
+          <div>
+            <h3>Mobile App Development</h3>
+            <p>Android & iOS apps with user-first design.</p>
+            <ul>
+              <li>Native and cross-platform apps</li>
+              <li>UI/UX prototyping</li>
+              <li>Secure authentication systems</li>
+              <li>App store deployment and support</li>
+            </ul>
+            <p class="testimonial">“Our app downloads doubled after RYZOM redesigned our mobile experience.”</p>
+          </div>
+        </div>
+        <!-- Marketing -->
+        <div class="timeline-item fade-up delay-3">
+          <img src="logo-marketing.png" alt="Digital Marketing" />
+          <div>
+            <h3>Digital Marketing</h3>
+            <p>SEO, PPC, content marketing, and social growth.</p>
+            <ul>
+              <li>Search engine optimization</li>
+              <li>Google Ads and PPC campaigns</li>
+              <li>Content creation and blogging</li>
+              <li>Social media management</li>
+            </ul>
+            <p class="stats">📈 Average client ROI: 3.5x</p>
+          </div>
+        </div>
+        <!-- Media -->
+        <div class="timeline-item fade-up delay-4">
+          <img src="logo-media.png" alt="Media Production" />
+          <div>
+            <h3>Media Production</h3>
+            <p>Video, photography, animation, and advertising support.</p>
+            <ul>
+              <li>Corporate video production</li>
+              <li>Product photography</li>
+              <li>Motion graphics and animation</li>
+              <li>Podcast and audio editing</li>
+            </ul>
+            <p class="testimonial">“Their video campaign boosted our engagement by 200%.”</p>
+          </div>
+        </div>
+        <!-- Strategy -->
+        <div class="timeline-item fade-up delay-5">
+          <img src="logo-strategy.png" alt="Business Strategy" />
+          <div>
+            <h3>Business Strategy</h3>
+            <p>Market analysis, planning, and financial strategy.</p>
+            <ul>
+              <li>Market research and segmentation</li>
+              <li>Goal setting and KPIs</li>
+              <li>SWOT analysis</li>
+              <li>Financial planning and forecasting</li>
+            </ul>
+            <p class="case-study"><strong>Case Study:</strong> Guided a startup to profitability within 18 months.</p>
+          </div>
+        </div>
       </div>
     </div>
-    <nav class="footer-nav">
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="footer-legal"><span>© <span id="year"></span> RYZOM. All rights reserved.</span></div>
-  </div>
-</footer>
+  </section>
+    <!-- ================= WORK ================= -->
+  <section id="work" class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Selected work</h2>
+        <p class="fade-up delay-1">A snapshot of how strategy meets execution.</p>
+      </div>
+      <div class="showcase">
+        <figure class="showcase-item fade-up">
+          <img src="Hero.jpeg" alt="Connected platform" class="lift" />
+          <figcaption><strong>Connected platform:</strong> Web + data + automation</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-1">
+          <img src="logo-media.png" alt="Media production" class="lift" />
+          <figcaption><strong>Media production:</strong> Video, sound, post</figcaption>
+        </figure>
+        <figure class="showcase-item fade-up delay-2">
+          <img src="logo-branding.png" alt="Brand systems" class="lift" />
+          <figcaption><strong>Brand systems:</strong> Modular identities</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
-<!-- SCRIPTS -->
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="fade-up">Who we are</h2>
+        <p class="fade-up delay-1">Your partner in growth—rooted in insight, scaling with innovation.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card fade-up">
+          <h3>Vision</h3>
+          <p>To be the top choice for business growth, helping companies succeed with creative and complete solutions.</p>
+        </div>
+        <div class="about-card fade-up delay-1">
+          <h3>Mission</h3>
+          <p>To deliver outstanding business support services that cultivate growth, inspire success, and enable businesses to reach their highest potential.</p>
+        </div>
+        <div class="about-card fade-up delay-2">
+          <h3>Philosophy</h3>
+          <p>Small changes build strength and stability. From roots to branches, we connect brands to people—powerfully and organically.</p>
+        </div>
+        <div class="about-card fade-up delay-3">
+          <h3>Values</h3>
+          <p>Integrity, innovation, and impact guide every project we deliver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="section alt">
+    <div class="container">
+      <div class="section-head"><h2 class="fade-up">Let’s build your growth</h2></div>
+      <form class="contact-form fade-up" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <div class="form-row">
+          <div class="form-field"><label>Name</label><input type="text" name="name" required /></div>
+          <div class="form-field"><label>Email</label><input type="email" name="email" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full"><label>Project details</label><textarea name="message" rows="6" required></textarea></div>
+        </div>
+        <button class="btn btn-gradient" type="submit">Send inquiry</button>
+      </form>
+      <div class="contact-meta fade-up delay-1">
+        <p><strong>Email:</strong> hello@ryzom.in</p>
+        <p><strong>Website:</strong> www.ryzom.in</p>
+        <p><strong>Location:</strong> Ponnani, KL, India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="company-logo.png" alt="RYZOM logo" class="brand-logo" />
+        <div>
+          <strong>RYZOM — Rhizome Solutec</strong>
+          <div class="sub">Cultivating excellence in every solutions</div>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-legal"><span>© <span id="year"></span> RYZOM. All rights reserved.</span></div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="script.js"></script>
+</body>
+</html>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+  // Footer year only
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
