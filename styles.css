@@ -67,12 +67,78 @@ a{color:var(--text);text-decoration:none}
 .section-head h2{font-size:clamp(32px,4vw,48px);margin:0 0 10px}
 .section-head p{color:var(--muted);margin:0}
 
-#treeCanvas {
+.tree-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.tree-svg {
   width: 100%;
-  height: 600px;
-  display: block;
-  margin: 0 auto;
-  background: transparent;
+  height: auto;
+}
+
+/* DRAW ANIMATION */
+.draw {
+  fill: none;
+  stroke: #4a2f19;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: grow 2.5s ease-out forwards;
+}
+
+.roots { stroke-width: 4; }
+.trunk { stroke-width: 12; }
+.branch { stroke-width: 6; }
+
+@keyframes grow {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ROOT TEXT */
+.root-text {
+  font-size: 18px;
+  fill: #3a2a1a;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 1.5s;
+}
+
+/* SERVICES */
+.service {
+  font-size: 16px;
+  fill: #2e7d32;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+/* LEAVES */
+.leaves circle {
+  fill: #2e7d32;
+  opacity: 0;
+  transform-origin: center;
+  animation: bloom 1.2s ease forwards;
+  animation-delay: 4s;
+}
+
+@keyframes bloom {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* HOVER */
+a:hover .branch {
+  stroke: #2e7d32;
+}
+
+a:hover .service {
+  fill: #1b5e20;
 }
 
 /* TIMELINE */
