@@ -1,11 +1,23 @@
 /* ========== VARIABLES ========== */
 :root {
-  --red:#EB5757;--blue:#2F80EC;--green:#219652;--yellow:#F2C94D;
-  --bg:#0B0D12;--text:#E6E8EE;--muted:#B9C0CC;--surface:#121419;--border:#1F232B;
+  --red:#EB5757;
+  --blue:#2F80EC;
+  --green:#219652;
+  --green-light:#2ecc71;   /* brighter green for leaves */
+  --yellow:#F2C94D;
+  --purple:#9B51E0;        /* new purple accent */
+  --bg:#0B0D12;
+  --text:#E6E8EE;
+  --muted:#B9C0CC;
+  --surface:#121419;
+  --border:#1F232B;
   --brand-gradient:linear-gradient(135deg,var(--red),var(--blue));
   --accent-gradient:linear-gradient(135deg,var(--green),var(--blue));
-  --font-primary:"Montserrat","Inter",sans-serif;--font-mono:"Cascadia Code",monospace;
-  --container:1200px;--radius:14px;--shadow:0 10px 30px rgba(0,0,0,0.35);
+  --font-primary:"Montserrat","Inter",sans-serif;
+  --font-mono:"Cascadia Code",monospace;
+  --container:1200px;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
 /* ========== GLOBAL ========== */
