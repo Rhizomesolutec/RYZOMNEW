@@ -59,7 +59,7 @@ export default function Contact() {
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
         <svg
           viewBox="0 0 1000 500"
-          className="w-full max-w-5xl h-auto"
+          className="w-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl h-auto"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -118,7 +118,7 @@ export default function Contact() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
+      <div className="site-shell relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Left: Contact Info & Brand CTA */}
@@ -126,10 +126,10 @@ export default function Contact() {
             <span className="text-xs font-cascadia uppercase tracking-widest text-brand-blue mb-4 block">
               Grow with Us
             </span>
-            <h2 className="text-3xl md:text-6xl font-bohuan uppercase tracking-wider text-white leading-tight mb-8">
+            <h2 className="text-3xl md:text-6xl xl:text-7xl 2xl:text-[5rem] font-bohuan uppercase tracking-wider text-white leading-tight mb-8">
               Let's Grow<br />Together
             </h2>
-            <p className="text-white/40 text-xs md:text-sm font-cascadia leading-relaxed mb-12 max-w-md">
+            <p className="text-white/40 text-xs md:text-sm xl:text-base font-cascadia leading-relaxed mb-12 max-w-md xl:max-w-lg 2xl:max-w-xl">
               Small structural optimizations yield exponential business strength. Get in touch with our team to map out your digital evolution.
             </p>
 

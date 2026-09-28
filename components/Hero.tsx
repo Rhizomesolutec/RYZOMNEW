@@ -1340,10 +1340,10 @@ export default function Hero() {
       </div>
 
       {/* ── Intro content — mobile: centered under Core / desktop: asymmetric left ── */}
-      <div className="relative z-10 w-full pt-[46svh] md:pt-44 px-6 md:px-24 lg:px-28 pb-2 md:pb-0">
+      <div className="relative z-10 w-full pt-[46svh] md:pt-44 site-shell-wide pb-2 md:pb-0">
         <div
           ref={contentRef}
-          className="relative max-w-sm md:max-w-lg w-full mx-auto md:mx-0 flex flex-col items-center md:items-start text-center md:text-left gap-4 md:gap-6 will-change-transform"
+          className="relative max-w-sm md:max-w-lg xl:max-w-xl 2xl:max-w-2xl w-full mx-auto md:mx-0 flex flex-col items-center md:items-start text-center md:text-left gap-4 md:gap-6 xl:gap-7 2xl:gap-8 will-change-transform"
         >
           {/* Subtle focal field behind heading — desktop only (mobile uses Core glow) */}
           <div
@@ -1460,7 +1460,7 @@ export default function Hero() {
               <motion.span
                 key={line}
                 variants={lineVariants}
-                className={`block text-[1.65rem] leading-[1.15] tracking-[0.07em] md:text-[2.75rem] lg:text-[3.15rem] md:leading-[1.12] md:tracking-[0.06em] ${
+                className={`block text-[1.65rem] leading-[1.15] tracking-[0.07em] md:text-[2.75rem] lg:text-[3.15rem] xl:text-[3.5rem] 2xl:text-[4rem] 3xl:text-[4.5rem] md:leading-[1.12] md:tracking-[0.06em] ${
                   i === 1
                     ? "bg-gradient-to-r from-brand-blue via-brand-purple to-brand-red bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(47,128,236,0.2)]"
                     : "text-white/90"
@@ -1484,7 +1484,7 @@ export default function Hero() {
               delay: isMobile ? 0.12 : 1.15,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="relative z-[1] max-w-[18rem] md:max-w-md text-white/45 text-[11px] md:text-xs font-cascadia leading-relaxed tracking-wide"
+            className="relative z-[1] max-w-[18rem] md:max-w-md xl:max-w-lg 2xl:max-w-xl text-white/45 text-[11px] md:text-xs xl:text-sm 2xl:text-base font-cascadia leading-relaxed tracking-wide"
           >
             We shape digital ecosystems through development, design, and growth strategy.
           </motion.p>
@@ -1502,7 +1502,7 @@ export default function Hero() {
               delay: isMobile ? 0.22 : 1.3,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="relative z-[1] flex flex-row items-center justify-center md:justify-start gap-2 md:gap-3 w-full max-w-sm md:max-w-md mt-1 md:mt-0.5"
+            className="relative z-[1] flex flex-row items-center justify-center md:justify-start gap-2 md:gap-3 w-full max-w-sm md:max-w-md xl:max-w-lg mt-1 md:mt-0.5"
           >
             <div ref={ctaPrimaryRef as React.RefObject<HTMLDivElement>} className="flex-1 md:flex-none">
               <a
@@ -1564,7 +1564,7 @@ export default function Hero() {
       {/* ── Living Core ecosystem — mobile: top-center stage / desktop: asymmetric ── */}
       <div
         ref={ecosystemRef}
-        className="absolute left-1/2 md:left-[62%] top-[34svh] md:top-[40%] -translate-x-1/2 -translate-y-1/2 w-[min(58vw,220px)] md:w-[min(78vw,520px)] h-[min(58vw,220px)] md:h-[min(78vw,520px)] pointer-events-none z-[1] will-change-transform"
+        className="absolute left-1/2 md:left-[62%] top-[34svh] md:top-[40%] -translate-x-1/2 -translate-y-1/2 w-[min(58vw,220px)] h-[min(58vw,220px)] md:w-[min(78vw,520px)] md:h-[min(78vw,520px)] xl:w-[min(42vw,580px)] xl:h-[min(42vw,580px)] 2xl:w-[min(38vw,640px)] 2xl:h-[min(38vw,640px)] pointer-events-none z-[1] will-change-transform"
         aria-hidden
       >
         <div

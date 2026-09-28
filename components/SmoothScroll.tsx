@@ -18,10 +18,11 @@ function isTouchMobile() {
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Native scroll on mobile — Lenis causes lag / fighting with touch
+    // Native scroll on phones — smoothest touch feel, no virtual-scroll overhead
     if (isTouchMobile()) {
       (window as any).lenis = null;
-      const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+      document.documentElement.classList.remove("lenis");
+      const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
       const onResize = () => ScrollTrigger.refresh();
       window.addEventListener("resize", onResize);
       return () => {
@@ -30,13 +31,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       };
     }
 
+    document.documentElement.classList.add("lenis");
+
     const lenis = new Lenis({
-      duration: 0.9,
+      // Slightly longer ease = premium smooth glide without feeling sticky
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.4,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.2,
       syncTouch: false,
+      autoResize: true,
     });
 
     (window as any).lenis = lenis;
@@ -50,11 +55,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.add(tickerCb);
     gsap.ticker.lagSmoothing(0);
 
-    const onResize = () => ScrollTrigger.refresh();
+    const onResize = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
     window.addEventListener("resize", onResize);
 
-    // Refresh after layout paints so pin distances are accurate
-    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
 
     return () => {
       window.clearTimeout(refreshTimer);
@@ -62,6 +69,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gsap.ticker.remove(tickerCb);
       lenis.destroy();
       (window as any).lenis = null;
+      document.documentElement.classList.remove("lenis");
     };
   }, []);
 

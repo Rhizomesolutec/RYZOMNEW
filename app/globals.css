@@ -42,6 +42,9 @@
   --color-brand-gray: var(--brand-gray);
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  /* Large desktop / monitor breakpoints beyond default Tailwind */
+  --breakpoint-3xl: 120rem; /* 1920px */
 }
 
 /* Base styles */
@@ -53,6 +56,139 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+/*
+  Site shell — fluid gutters + capped width so big PC monitors
+  feel filled (not a skinny laptop column floating in empty space)
+*/
+.site-shell {
+  width: 100%;
+  max-width: 80rem; /* ~1280 */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .site-shell {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .site-shell {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .site-shell {
+    max-width: 90rem; /* ~1440 */
+    padding-inline: 4rem;
+  }
+}
+@media (min-width: 1536px) {
+  .site-shell {
+    max-width: 100rem; /* ~1600 */
+    padding-inline: 5rem;
+  }
+}
+@media (min-width: 1920px) {
+  .site-shell {
+    max-width: 112rem; /* ~1792 — comfortable on 27"+ monitors */
+    padding-inline: 6rem;
+  }
+}
+
+/* Wider shell for cinematic / full-bleed-adjacent sections */
+.site-shell-wide {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .site-shell-wide {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .site-shell-wide {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .site-shell-wide {
+    padding-inline: 4rem;
+  }
+}
+@media (min-width: 1536px) {
+  .site-shell-wide {
+    padding-inline: 5rem;
+    max-width: 120rem;
+  }
+}
+@media (min-width: 1920px) {
+  .site-shell-wide {
+    padding-inline: 6.5rem;
+    max-width: 140rem;
+  }
+}
+
+/* Padding-only gutters — pair with an explicit max-width utility */
+.site-gutter {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .site-gutter {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .site-gutter {
+    padding-inline: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .site-gutter {
+    padding-inline: 4rem;
+  }
+}
+@media (min-width: 1536px) {
+  .site-gutter {
+    padding-inline: 5rem;
+  }
+}
+@media (min-width: 1920px) {
+  .site-gutter {
+    padding-inline: 6rem;
+  }
+}
+
+/* Fluid display type for monitor-scale hero/section titles */
+.text-display {
+  font-size: clamp(1.65rem, 1.1rem + 2.4vw, 3.75rem);
+  line-height: 1.08;
+}
+@media (min-width: 1920px) {
+  .text-display {
+    font-size: clamp(2.75rem, 1.5rem + 1.6vw, 4.5rem);
+  }
+}
+
+/* Lenis: keep browser scroll-behavior from fighting smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+/* Prefer compositor-friendly scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-padding-top: 0;
+  }
 }
 
 /* Custom Scrollbar */
@@ -235,4 +371,19 @@ body {
     r: 4px;
     filter: drop-shadow(0 0 4px var(--node-color, #2F80EC)) drop-shadow(0 0 7px var(--node-color, #2F80EC));
   }
+}
+
+/* Continuous client logo marquee */
+@keyframes client-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-client-marquee {
+  animation: client-marquee 28s linear infinite;
+  will-change: transform;
 }

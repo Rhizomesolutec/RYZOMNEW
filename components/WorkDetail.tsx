@@ -117,13 +117,13 @@ export default function WorkDetail() {
         className="relative bg-black select-none overflow-hidden"
       >
         {/* Intro band */}
-        <div className="relative z-20 px-5 sm:px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-10 md:pb-14 border-b border-white/[0.06]">
+        <div className="relative z-20 site-shell-wide pt-20 md:pt-28 xl:pt-32 2xl:pt-36 pb-10 md:pb-14 xl:pb-16 border-b border-white/[0.06]">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-4xl"
+            className="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl"
           >
             <span className="text-[10px] sm:text-xs font-cascadia uppercase tracking-[0.28em] text-brand-blue mb-3 block">
               Case Studies
@@ -239,14 +239,14 @@ function WorkPanel({
 
       {/* Split showcase: copy + media card */}
       <div
-        className={`relative z-10 min-h-[100svh] md:min-h-screen grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center px-5 sm:px-8 md:px-16 lg:px-24 py-16 md:py-20 ${
+        className={`relative z-10 min-h-[100svh] md:min-h-screen grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 items-center site-shell-wide py-16 md:py-20 xl:py-24 2xl:py-28 ${
           flip ? "md:[direction:rtl]" : ""
         }`}
       >
         {/* Copy */}
         <motion.div
           style={{ x: titleX }}
-          className={`w-full max-w-xl will-change-transform md:[direction:ltr] ${
+          className={`w-full max-w-xl xl:max-w-2xl 2xl:max-w-3xl will-change-transform md:[direction:ltr] ${
             flip ? "md:justify-self-end" : ""
           }`}
         >
@@ -307,14 +307,14 @@ function WorkPanel({
           className="relative w-full md:[direction:ltr] will-change-transform"
         >
           <div
-            className="relative w-full aspect-[4/5] sm:aspect-[16/11] md:aspect-[4/5] lg:aspect-[16/12] max-h-[min(72svh,560px)] mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
+            className="relative w-full aspect-[4/5] sm:aspect-[16/11] md:aspect-[4/5] lg:aspect-[16/12] max-h-[min(72svh,560px)] xl:max-h-[min(75svh,640px)] 2xl:max-h-[min(78svh,720px)] mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
             style={{ boxShadow: `0 24px 80px rgba(0,0,0,0.55), 0 0 40px ${project.color}18` }}
           >
             {project.video ? (
               <>
                 <video
                   ref={videoRef}
-                  className="absolute inset-0 h-full w-full min-h-full min-w-full object-cover object-center scale-[1.2] origin-center will-change-transform"
+                  className="absolute inset-0 h-full w-full min-h-full min-w-full object-cover object-center scale-[1.2] origin-center"
                   src={project.video}
                   muted
                   loop
@@ -390,7 +390,7 @@ function ProjectModal({ project, onClose }: ModalProps) {
       transition={{ duration: 0.4 }}
       className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl overflow-y-auto px-6 py-12 md:py-24"
     >
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto relative">
         <button
           onClick={onClose}
           className="absolute -top-4 right-0 text-white/60 hover:text-white p-2 rounded-full border border-white/10 bg-white/5 hover:border-white/30 transition-all z-20 cursor-pointer"

@@ -116,7 +116,7 @@ export default function Services() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 w-1 h-1 pointer-events-none opacity-0"
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative z-10 site-shell">
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function Services() {
           <p className="text-xs font-cascadia uppercase tracking-widest text-brand-blue mb-4">
             Our System
           </p>
-          <h2 className="text-3xl md:text-5xl font-bohuan uppercase tracking-wider text-white leading-tight mb-5">
+          <h2 className="text-3xl md:text-5xl xl:text-6xl 2xl:text-[4rem] font-bohuan uppercase tracking-wider text-white leading-tight mb-5">
             Five disciplines.
             <br />
             <span className="text-white/45">One connected practice.</span>
@@ -156,7 +156,7 @@ export default function Services() {
           initial={prefersReducedMotion ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.12 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 xl:gap-8 2xl:gap-10"
         >
           {SERVICES_DATA.map((service, idx) => (
             <ServiceCard

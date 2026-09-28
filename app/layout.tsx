@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth h-full antialiased dark">
+    <html lang="en" className="h-full antialiased dark">
       <body className="relative min-h-full bg-black text-white selection:bg-brand-blue selection:text-white flex flex-col noise-overlay">
         <Preloader />
 

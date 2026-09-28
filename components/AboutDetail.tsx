@@ -70,12 +70,12 @@ export default function AboutDetail() {
 
         <motion.div
           style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
-          className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center will-change-transform"
+          className="relative z-10 site-gutter text-center will-change-transform max-w-[56rem] xl:max-w-[64rem] 2xl:max-w-[72rem]"
         >
           <p className="text-[10px] font-cascadia uppercase tracking-[0.4em] text-white/35 mb-8 md:mb-10">
             Manifesto
           </p>
-          <h1 className="font-bohuan uppercase text-[clamp(2rem,7vw,5.5rem)] tracking-[0.04em] md:tracking-[0.06em] leading-[1.02] mb-8 md:mb-10">
+          <h1 className="font-bohuan uppercase text-[clamp(2rem,7vw,5.5rem)] xl:text-[clamp(3.25rem,5vw,6.25rem)] tracking-[0.04em] md:tracking-[0.06em] leading-[1.02] mb-8 md:mb-10">
             Small changes
             <br />
             build{" "}
@@ -96,7 +96,7 @@ export default function AboutDetail() {
 
       {/* ═══ Opening statement — editorial column ═══ */}
       <section className="relative border-b border-white/[0.06]">
-        <div className="max-w-3xl mx-auto px-6 md:px-12 py-20 md:py-28">
+        <div className="site-gutter py-20 md:py-28 xl:py-32 max-w-[48rem] xl:max-w-[52rem] 2xl:max-w-[56rem]">
           <p className="font-cascadia text-[11px] uppercase tracking-[0.28em] text-brand-blue mb-8">
             Why we exist
           </p>
@@ -134,7 +134,7 @@ export default function AboutDetail() {
             />
 
             <div
-              className={`max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start ${
+              className={`site-shell py-20 md:py-28 xl:py-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-20 items-start ${
                 reverse ? "lg:[direction:rtl]" : ""
               }`}
             >
@@ -178,7 +178,7 @@ export default function AboutDetail() {
 
       {/* ═══ Root system — static process line (not a tab UI) ═══ */}
       <section className="relative border-b border-white/[0.06] py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="site-shell">
           <p className="text-[10px] font-cascadia uppercase tracking-[0.28em] text-brand-blue mb-4 text-center">
             The root system
           </p>
@@ -222,7 +222,7 @@ export default function AboutDetail() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 py-24 text-center">
+        <div className="relative z-10 site-gutter py-24 xl:py-28 2xl:py-32 text-center max-w-[56rem] xl:max-w-[64rem]">
           <p className="font-cascadia text-[10px] uppercase tracking-[0.35em] text-white/30 mb-8">
             Our vow
           </p>

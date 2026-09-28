@@ -131,7 +131,7 @@ export default function WhyRyzomDetail() {
       />
 
       {/* Header */}
-      <header className="relative z-20 pt-10 md:pt-14 px-5 sm:px-8 md:px-12 max-w-7xl mx-auto">
+      <header className="relative z-20 pt-10 md:pt-14 xl:pt-16 site-shell">
         <p className="text-[10px] font-cascadia uppercase tracking-[0.35em] text-brand-blue mb-3">
           Why RYZOM
         </p>
@@ -149,11 +149,11 @@ export default function WhyRyzomDetail() {
       </header>
 
       {/* ═══ Dial theater ═══ */}
-      <main className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-10 md:py-14">
+      <main className="relative z-10 site-shell py-10 md:py-14 xl:py-16">
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-8 items-center min-h-[70vh]">
           {/* Dial */}
           <div className="xl:col-span-7 flex justify-center">
-            <div className="relative w-full max-w-[520px] aspect-square">
+            <div className="relative w-full max-w-[520px] xl:max-w-[600px] 2xl:max-w-[680px] aspect-square">
               {/* Outer ring */}
               <div className="absolute inset-[4%] rounded-full border border-white/10" />
               <div className="absolute inset-[10%] rounded-full border border-white/[0.06]" />
@@ -361,8 +361,8 @@ export default function WhyRyzomDetail() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/[0.07] py-8 px-5 sm:px-8 md:px-12">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <footer className="relative z-10 border-t border-white/[0.07] py-8">
+        <div className="site-shell flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="font-cascadia text-[10px] uppercase tracking-[0.22em] text-white/30">
             Root · Growth · Connection · Expansion · Success
           </p>

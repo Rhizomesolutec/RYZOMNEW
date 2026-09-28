@@ -50,7 +50,7 @@ export default function About() {
       id="about"
       className="relative min-h-screen py-32 bg-black overflow-hidden select-none"
     >
-      <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center">
+      <div className="site-shell relative z-10 flex flex-col items-center">
         {/* Core foundation — same stylized Y as Living Core / navbar logo */}
         <div id="about-core-foundation" className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] mb-16 flex items-center justify-center relative">
           <div
@@ -104,19 +104,19 @@ export default function About() {
         </div>
 
         {/* Storytelling & Philosophy */}
-        <div className="text-center max-w-3xl mb-32 flex flex-col items-center">
+        <div className="text-center max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mb-32 flex flex-col items-center">
           <span className="text-xs font-cascadia uppercase tracking-widest text-brand-blue mb-4 block">
             Brand Philosophy
           </span>
 
           <h2
             ref={quoteRef as any}
-            className="text-2xl md:text-5xl font-bohuan uppercase tracking-wider text-white leading-tight mb-8 cursor-pointer transition-all duration-300"
+            className="text-2xl md:text-5xl xl:text-6xl 2xl:text-[4rem] font-bohuan uppercase tracking-wider text-white leading-tight mb-8 cursor-pointer transition-all duration-300"
           >
             "Small changes build <span className="text-brand-red glow-text-red">strength</span> and <span className="text-brand-green glow-text-green">stability</span>."
           </h2>
 
-          <p className="text-white/50 text-xs md:text-sm font-cascadia leading-relaxed max-w-2xl">
+          <p className="text-white/50 text-xs md:text-sm xl:text-base font-cascadia leading-relaxed max-w-2xl xl:max-w-3xl">
             RYZOM stands for creative ideas that branch out and connect brands to people in powerful, organic ways. Every successful brand grows from strong roots: insight, innovation, balance, and impact, helping your system expand naturally in every direction.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="about-milestone-panel glass-panel p-8 rounded-2xl border border-white/5 w-full md:max-w-md shadow-lg transition-[box-shadow,border-color] duration-500"
+                    className="about-milestone-panel glass-panel p-8 rounded-2xl border border-white/5 w-full md:max-w-md xl:max-w-lg 2xl:max-w-xl shadow-lg transition-[box-shadow,border-color] duration-500"
                   >
                     <span
                       className="text-[10px] font-cascadia font-semibold tracking-wider px-2.5 py-0.5 rounded-full border mb-4 inline-block"

@@ -159,18 +159,18 @@ export default function WhyRyzom() {
 
       <div className="absolute top-0 bottom-0 left-1/2 w-[1.5px] bg-gradient-to-b from-brand-purple/15 via-white/5 to-[#2F80EC]/15 transform -translate-x-1/2 pointer-events-none z-0 hidden md:block" />
 
-      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-12 relative z-10 flex flex-col items-center">
+      <div className="w-full site-shell relative z-10 flex flex-col items-center">
         <div className="mb-8 md:mb-24 text-center px-2">
           <span className="text-xs font-cascadia uppercase tracking-widest text-brand-blue mb-3 block">
             Why RYZOM
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bohuan uppercase tracking-wide md:tracking-wider text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl xl:text-6xl 2xl:text-[4rem] font-bohuan uppercase tracking-wide md:tracking-wider text-white">
             Growth Methodology
           </h2>
         </div>
 
         {/* Equal-width step rail — stable size on all mobile widths */}
-        <div className="relative w-full max-w-4xl grid grid-cols-5 items-start gap-0 mb-10 md:mb-24 pt-6">
+        <div className="relative w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl grid grid-cols-5 items-start gap-0 mb-10 md:mb-24 pt-6">
           {/* Line through circle centers: pt-6 + half orb (9/11/14) */}
           <div className="absolute left-[10%] right-[10%] top-[calc(1.5rem+1.125rem)] sm:top-[calc(1.5rem+1.375rem)] md:top-[calc(1.5rem+1.75rem)] h-[2px] -translate-y-1/2 bg-white/5 z-0 pointer-events-none" />
           <div
@@ -194,7 +194,7 @@ export default function WhyRyzom() {
         </div>
 
         {/* Smaller mobile description card */}
-        <div className="w-full max-w-2xl min-h-[160px] md:min-h-[220px]">
+        <div className="w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl min-h-[160px] md:min-h-[220px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStage.id}

@@ -5,6 +5,7 @@ import About from "@/components/About";
 import WhyRyzom from "@/components/WhyRyzom";
 import Contact from "@/components/Contact";
 import LivingCore from "@/components/LivingCore";
+import Clients from "@/components/Clients";
 
 export default function Home() {
   return (
@@ -18,8 +19,11 @@ export default function Home() {
       {/* Interactive Growth Chain Methodology Section */}
       <WhyRyzom />
 
-      {/* Signature Root Growth & Services Section */}
+      {/* Signature Root Growth & Services Section (Our System) */}
       <Services />
+
+      {/* Trusted Client Network & Highlights */}
+      <Clients />
 
       {/* Case Studies Portfolio Section */}
       <Work />

@@ -166,9 +166,11 @@ export default function LivingCore() {
     const handleResize = () => {
       const w = window.innerWidth;
       let scale = 1.0;
-      // Keep Core clearly visible on phones (same presence as desktop, slightly smaller)
+      // Keep Core clearly visible on phones; grow slightly on big PC monitors
       if (w <= 768) scale = 0.92;
       else if (w <= 1024) scale = 0.923;
+      else if (w >= 1920) scale = 1.18;
+      else if (w >= 1536) scale = 1.1;
       else scale = 1.0;
       setCoreScale(scale);
       scaleRef.current = scale;
@@ -208,13 +210,13 @@ export default function LivingCore() {
     const prevStep = JOURNEY_STEPS[prevIdx];
     const skipScroll = !!opts?.skipScroll;
 
-    // 1. Move core toward this journey target (snappy — kills prior tween so reverse isn't lagged)
+    // 1. Move core toward this journey target (faster tween while scroll-syncing)
     const elemIdx = existingTargets.indexOf(step.targetSelector);
     if (elemIdx !== -1) {
       gsap.killTweensOf(stateRef.current);
       gsap.to(stateRef.current, {
         progressIndex: elemIdx,
-        duration: goingUp ? 0.35 : 0.45,
+        duration: skipScroll ? 0.22 : goingUp ? 0.35 : 0.45,
         ease: "power2.out",
         overwrite: true,
       });
@@ -319,77 +321,54 @@ export default function LivingCore() {
     }, skipScroll ? 120 : goingUp ? 320 : 480);
   }, [existingTargets]);
 
-  // Desktop: wheel/keyboard step journey. Mobile: native scroll drives Core (no touch hijack = no lag)
+  // Scroll-linked Core on every screen — no wheel hijack, so Lenis/native scroll stays fluid
   useEffect(() => {
     if (!isReady || existingTargets.length === 0) return;
 
-    const isMobile =
-      window.matchMedia("(max-width: 768px)").matches ||
-      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    let raf = 0;
+    const syncFromScroll = () => {
+      raf = 0;
+      const midY = window.innerHeight * 0.42;
+      let bestIdx = 0;
+      let bestDist = Infinity;
 
-    if (isMobile) {
-      let raf = 0;
-      const syncFromScroll = () => {
-        raf = 0;
-        const midY = window.innerHeight * 0.42;
-        let bestIdx = 0;
-        let bestDist = Infinity;
-
-        for (let i = 0; i < JOURNEY_STEPS.length; i++) {
-          const el = document.querySelector(JOURNEY_STEPS[i].targetSelector) as HTMLElement | null;
-          if (!el) continue;
-          const rect = el.getBoundingClientRect();
-          const cy = rect.top + rect.height / 2;
-          const dist = Math.abs(cy - midY);
-          // Prefer targets near/above mid viewport so Core stays on-screen while scrolling
-          if (cy < window.innerHeight * 0.92 && cy > -40 && dist < bestDist) {
-            bestDist = dist;
-            bestIdx = i;
-          }
+      for (let i = 0; i < JOURNEY_STEPS.length; i++) {
+        const el = document.querySelector(JOURNEY_STEPS[i].targetSelector) as HTMLElement | null;
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        const cy = rect.top + rect.height / 2;
+        const dist = Math.abs(cy - midY);
+        // Prefer targets near/above mid viewport so Core stays on-screen while scrolling
+        if (cy < window.innerHeight * 0.92 && cy > -40 && dist < bestDist) {
+          bestDist = dist;
+          bestIdx = i;
         }
-
-        if (bestIdx !== stepRef.current) {
-          executeStep(bestIdx, { skipScroll: true });
-        }
-      };
-
-      const onScroll = () => {
-        if (raf) return;
-        raf = requestAnimationFrame(syncFromScroll);
-      };
-
-      // Initial sync so Core appears immediately on mobile
-      syncFromScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll, { passive: true });
-
-      return () => {
-        if (raf) cancelAnimationFrame(raf);
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-        if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
-        if (dissolveTimerRef.current) clearTimeout(dissolveTimerRef.current);
-      };
-    }
-
-    const handleWheel = (e: WheelEvent) => {
-      // While locked, still prevent native scroll fighting Lenis — but don't queue
-      if (isLockRef.current) {
-        e.preventDefault();
-        return;
       }
-      if (Math.abs(e.deltaY) < 10) return;
-      e.preventDefault();
 
-      const dir = e.deltaY > 0 ? 1 : -1;
-      // Strong upward/downward flick advances multiple journey steps
-      const burst = Math.min(3, Math.max(1, Math.round(Math.abs(e.deltaY) / 90)));
-      executeStep(stepRef.current + dir * burst);
+      if (bestIdx !== stepRef.current) {
+        executeStep(bestIdx, { skipScroll: true });
+      }
     };
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(syncFromScroll);
+    };
+
+    // Initial sync so Core appears immediately
+    syncFromScroll();
+
+    // Lenis emits on window scroll via its virtual scroll; also listen to lenis if present
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    const lenis = (window as any).lenis;
+    const onLenisScroll = () => onScroll();
+    if (lenis?.on) lenis.on("scroll", onLenisScroll);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isLockRef.current) return;
-      if (["ArrowDown", "PageDown", "Space"].includes(e.code)) {
+      if (["ArrowDown", "PageDown"].includes(e.code)) {
         e.preventDefault();
         executeStep(stepRef.current + 1);
       } else if (["ArrowUp", "PageUp"].includes(e.code)) {
@@ -397,13 +376,14 @@ export default function LivingCore() {
         executeStep(stepRef.current - 1);
       }
     };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("wheel", handleWheel);
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       window.removeEventListener("keydown", handleKeyDown);
+      if (lenis?.off) lenis.off("scroll", onLenisScroll);
       if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
       if (dissolveTimerRef.current) clearTimeout(dissolveTimerRef.current);
     };
@@ -447,7 +427,8 @@ export default function LivingCore() {
     const disperse: Particle[] = [];
 
     // Fewer orbiters on mobile — keeps Core smooth without lag
-    const orbiterCount = window.innerWidth <= 768 ? 14 : 35;
+    // Initialize orbiters — keep particle count low for smooth scrolling
+    const orbiterCount = window.innerWidth <= 768 ? 10 : 18;
     for (let i = 0; i < orbiterCount; i++) {
       orbiters.push({
         x: 0,
@@ -464,7 +445,7 @@ export default function LivingCore() {
       });
     }
 
-    const softGlow = window.innerWidth <= 768 ? 0 : 1;
+    const softGlow = 0; // shadowBlur is expensive — keep Core glow CSS-only for smooth scroll
     let animFrame: number;
 
     const updateAndRender = () => {

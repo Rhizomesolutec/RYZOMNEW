@@ -57,22 +57,22 @@ export default function Navbar() {
           : "bg-transparent py-5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="site-shell flex items-center justify-between">
           {/* Logo */}
           <div ref={logoRef as any} className="cursor-pointer">
             <Link href="/" onClick={(e) => handleNavClick(e, "hero")}>
-              <Logo className="w-28 md:w-32 h-auto" animateOnLoad={true} interactive={true} />
+              <Logo className="w-28 md:w-32 xl:w-36 2xl:w-40 h-auto" animateOnLoad={true} interactive={true} />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 xl:gap-10 2xl:gap-12">
             {navItems.map((item, idx) => (
               <div key={item.id} ref={linkRefs[idx] as any} className="relative py-2">
                 <Link
                   href={item.path}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className="text-white/60 hover:text-white text-xs uppercase tracking-wider font-semibold transition-colors duration-300 relative group"
+                  className="text-white/60 hover:text-white text-xs xl:text-sm uppercase tracking-wider font-semibold transition-colors duration-300 relative group"
                 >
                   {item.name}
                   {/* Underline animation */}

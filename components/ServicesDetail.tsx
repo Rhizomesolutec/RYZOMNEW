@@ -156,7 +156,7 @@ export default function ServicesDetail() {
       />
 
       <header className="relative z-20 border-b border-white/[0.07]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-10 md:py-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="site-shell py-10 md:py-14 xl:py-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-[10px] sm:text-xs font-cascadia uppercase tracking-[0.28em] text-brand-blue mb-3">
               Services Atlas
@@ -174,7 +174,7 @@ export default function ServicesDetail() {
         </div>
 
         <nav
-          className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 pb-4 flex gap-2 overflow-x-auto"
+          className="site-shell pb-4 flex gap-2 overflow-x-auto"
           aria-label="Service modules"
         >
           {SERVICES_DETAIL_DATA.map((s, i) => {
@@ -201,7 +201,7 @@ export default function ServicesDetail() {
         </nav>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-10 md:py-16">
+      <main className="relative z-10 site-shell py-10 md:py-16 xl:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 min-h-[70vh]">
           <aside className="hidden lg:flex lg:col-span-3 flex-col gap-1 border-r border-white/[0.06] pr-6">
             {SERVICES_DETAIL_DATA.map((s, i) => {
@@ -370,8 +370,8 @@ export default function ServicesDetail() {
         </div>
       </main>
 
-      <footer className="relative z-10 border-t border-white/[0.07] py-8 px-5 sm:px-8 md:px-12">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <footer className="relative z-10 border-t border-white/[0.07] py-8">
+        <div className="site-shell flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="font-cascadia text-[10px] uppercase tracking-[0.2em] text-white/30">
             Identity → Product → Growth → Story → Direction
           </p>
