@@ -29,8 +29,8 @@ export const CLIENT_LOGOS: ClientLogo[] = [
   {
     id: "cultscribe",
     name: "Cultscribe",
-    website: "https://cult-theta.vercel.app/",
-    displayUrl: "cult-theta.vercel.app",
+    website: "https://www.cultscribe.com",
+    displayUrl: "www.cultscribe.com",
     logo: "/client/cultscribe%20logo.png",
     color: "#EB5757",
     glowColor: "rgba(235, 87, 87, 0.5)",

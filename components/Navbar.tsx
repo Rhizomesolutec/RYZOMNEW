@@ -12,7 +12,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
 
   const logoRef = useMagnetic(0.2);
   const linkRefs = [
@@ -30,12 +30,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Lock body scroll + Escape to close while mobile menu is open
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const prev = document.body.style.overflow;
@@ -44,7 +42,6 @@ export default function Navbar() {
       if (e.key === "Escape") setMobileMenuOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    closeBtnRef.current?.focus();
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
@@ -65,7 +62,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-[70] transition-all duration-500 py-4 ${
-          scrolled
+          scrolled || mobileMenuOpen
             ? "bg-black/70 backdrop-blur-md border-b border-white/5 py-3"
             : "bg-transparent py-5"
         }`}
@@ -106,8 +103,9 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile menu toggle — always above the overlay */}
+          {/* Single mobile menu control — Menu when closed, X when open */}
           <button
+            ref={menuToggleRef}
             type="button"
             onClick={() => setMobileMenuOpen((o) => !o)}
             className="md:hidden relative z-[71] flex items-center justify-center w-11 h-11 rounded-full border border-white/20 bg-black/60 text-white hover:text-brand-blue hover:border-brand-blue/50 transition-colors touch-manipulation"
@@ -131,22 +129,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-[60] bg-black/97 backdrop-blur-xl flex flex-col md:hidden"
+            className="fixed inset-0 z-[60] bg-black/97 backdrop-blur-xl flex flex-col md:hidden pt-[4.75rem]"
           >
-            {/* Top bar spacer matching header + dedicated close */}
-            <div className="flex items-center justify-end site-shell pt-[max(1rem,env(safe-area-inset-top))] pb-2 min-h-[4.5rem]">
-              <button
-                ref={closeBtnRef}
-                type="button"
-                onClick={closeMenu}
-                className="flex items-center justify-center w-12 h-12 rounded-full border border-white/25 bg-white/10 text-white hover:bg-white/20 active:scale-95 transition-all touch-manipulation"
-                aria-label="Close menu"
-              >
-                <X size={24} strokeWidth={2.5} />
-              </button>
-            </div>
-
-            <nav className="flex-1 flex flex-col items-center justify-center gap-2 px-6 pb-10 overflow-y-auto">
+            <nav className="flex-1 flex flex-col items-center justify-start sm:justify-center gap-1 px-6 pb-10 pt-4 overflow-y-auto">
               {navItems.map((item) => (
                 <Link
                   key={item.id}
