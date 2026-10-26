@@ -447,8 +447,17 @@ export default function LivingCore() {
 
     const softGlow = 0; // shadowBlur is expensive — keep Core glow CSS-only for smooth scroll
     let animFrame: number;
+    let tabHidden = document.hidden;
+    const onVis = () => {
+      tabHidden = document.hidden;
+    };
+    document.addEventListener("visibilitychange", onVis);
 
     const updateAndRender = () => {
+      if (tabHidden) {
+        animFrame = requestAnimationFrame(updateAndRender);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const progress = stateRef.current.progressIndex;
@@ -666,6 +675,7 @@ export default function LivingCore() {
     return () => {
       cancelAnimationFrame(animFrame);
       window.removeEventListener("resize", resizeCanvas);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, [isReady, existingTargets, isDissolved]);
 

@@ -25,7 +25,7 @@ export default function Logo({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/Images/Ryzom logo.webp"
+        src="/Images/Ryzom%20logo.webp"
         alt="RYZOM Logo"
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] max-w-none h-auto mix-blend-screen select-none pointer-events-none transition-all duration-500"
         style={{

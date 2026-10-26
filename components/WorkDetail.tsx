@@ -374,13 +374,18 @@ function ProjectModal({ project, onClose }: ModalProps) {
     document.body.style.overflow = "hidden";
     const lenis = (window as any).lenis;
     if (lenis) lenis.stop();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
 
     return () => {
       document.body.style.overflow = "";
-      const lenis = (window as any).lenis;
-      if (lenis) lenis.start();
+      const lenis2 = (window as any).lenis;
+      if (lenis2) lenis2.start();
+      window.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <motion.div
@@ -389,13 +394,18 @@ function ProjectModal({ project, onClose }: ModalProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
       className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl overflow-y-auto px-6 py-12 md:py-24"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title} case study`}
     >
       <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto relative">
         <button
+          type="button"
           onClick={onClose}
-          className="absolute -top-4 right-0 text-white/60 hover:text-white p-2 rounded-full border border-white/10 bg-white/5 hover:border-white/30 transition-all z-20 cursor-pointer"
+          aria-label="Close project details"
+          className="fixed top-[max(1rem,env(safe-area-inset-top))] right-4 md:right-8 z-[110] w-12 h-12 rounded-full border border-white/30 bg-black/90 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors cursor-pointer touch-manipulation shadow-[0_0_24px_rgba(0,0,0,0.7)]"
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" strokeWidth={2.5} />
         </button>
 
         <div className="border-b border-white/10 pb-12 mb-16 relative">

@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
   const whatsappUrl = "https://wa.me/919744643646?text=Hi%20RYZOM%2C%20I'm%20interested%20in%20starting%20a%20project%20with%20you.";
 
   return (
-    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 flex items-center gap-3 pointer-events-none">
+    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 flex items-center gap-3 pointer-events-none">
       <AnimatePresence>
         {hovered && (
           <motion.div

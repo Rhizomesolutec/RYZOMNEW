@@ -43,7 +43,7 @@ const SERVICES_DETAIL_DATA: ServiceDetail[] = [
     ],
     color: "#EB5757",
     icon: Palette,
-    image: "/Images/services/branding_design_meaningful.png",
+    image: "/Images/services/branding_design_meaningful.webp",
   },
   {
     id: "development",
@@ -61,7 +61,7 @@ const SERVICES_DETAIL_DATA: ServiceDetail[] = [
     ],
     color: "#2F80EC",
     icon: Code,
-    image: "/Images/services/development.png",
+    image: "/Images/services/development.webp",
   },
   {
     id: "marketing",
@@ -79,7 +79,7 @@ const SERVICES_DETAIL_DATA: ServiceDetail[] = [
     ],
     color: "#219652",
     icon: Megaphone,
-    image: "/Images/services/digital_marketing.png",
+    image: "/Images/services/digital_marketing.webp",
   },
   {
     id: "media",
@@ -97,7 +97,7 @@ const SERVICES_DETAIL_DATA: ServiceDetail[] = [
     ],
     color: "#F2C94D",
     icon: Video,
-    image: "/Images/services/media_production.png",
+    image: "/Images/services/media_production.webp",
   },
   {
     id: "strategy",
@@ -115,7 +115,7 @@ const SERVICES_DETAIL_DATA: ServiceDetail[] = [
     ],
     color: "#9A51E0",
     icon: Compass,
-    image: "/Images/services/business_strategy.png",
+    image: "/Images/services/business_strategy.webp",
   },
 ];
 
@@ -271,6 +271,7 @@ export default function ServicesDetail() {
                       src={activeService.image}
                       alt={activeService.title}
                       fill
+                      unoptimized
                       className="object-cover object-center"
                       sizes="(max-width: 768px) 100vw, 45vw"
                       priority

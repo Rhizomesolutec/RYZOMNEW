@@ -431,12 +431,17 @@ function ProjectModal({
     document.body.style.overflow = "hidden";
     const lenis = (window as any).lenis;
     if (lenis) lenis.stop();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
-      const lenis = (window as any).lenis;
-      if (lenis) lenis.start();
+      const lenis2 = (window as any).lenis;
+      if (lenis2) lenis2.start();
+      window.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <motion.div
@@ -444,7 +449,10 @@ function ProjectModal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-xl"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title} case study`}
     >
       <div
         className="absolute inset-0"
@@ -454,11 +462,12 @@ function ProjectModal({
 
       <div className="relative z-10 w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl max-h-[90vh] overflow-y-auto bg-black/90 border border-white/10 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 xl:p-14 text-white scrollbar-none shadow-2xl">
         <button
+          type="button"
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-6 right-6 w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors z-20 cursor-pointer"
+          className="sticky top-0 float-right ml-auto mb-2 sm:absolute sm:top-5 sm:right-5 sm:float-none sm:mb-0 w-12 h-12 rounded-full border border-white/30 bg-black/90 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors z-30 cursor-pointer touch-manipulation shadow-[0_0_20px_rgba(0,0,0,0.6)]"
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" strokeWidth={2.5} />
         </button>
 
         <div className="mb-12">
